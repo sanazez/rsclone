@@ -1,0 +1,14 @@
+.search input::placeholder {
+    font-size: 1rem;
+}
+
+.search input {
+    text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 500px) {
+    .search input::placeholder {
+        font-size: 0.9rem;
+
+    }
+}

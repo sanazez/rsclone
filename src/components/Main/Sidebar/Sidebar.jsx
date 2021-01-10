@@ -1,5 +1,5 @@
 import React from 'react';
-// import classes from './Sidebar.module.css';
+import classes from './Sidebar.module.css';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
@@ -12,14 +12,16 @@ const Sidebar = (props) => {
   // const handleChange = (event) => {
   //   setState({ ...state, [event.target.name]: event.target.checked });
   // };
-  return <aside>
+  return <aside className={classes.sidebar}>
     <FormControlLabel
+      className={classes.checkBox}
       control={<Checkbox name="fullTime" color="primary" />}
       label="Full Time"
     />
-    <Grid container spacing={1} alignItems="flex-end">
+    <h3>LOCATION</h3>
+    <Grid className={classes.searchContiner} container spacing={1} alignItems="flex-end">
       <Grid item>
-        <PublicIcon />
+        <PublicIcon className={classes.search} />
       </Grid>
       <Grid item>
         <TextField id="input-with-icon-grid" label="City, state or country" />
