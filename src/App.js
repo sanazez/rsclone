@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { Button } from '@material-ui/core';
+import Sidebar from './components/Sidebar/Sidebar';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           Learn React
         </a>
       </header>
-      <Button color="primary">Hello World</Button>
+      <Sidebar />
     </div>
   );
 }
