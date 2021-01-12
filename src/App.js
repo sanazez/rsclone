@@ -3,11 +3,12 @@ import './App.css';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 
-function App() {
+
+
+const App = (props) => {
   return (
     <div className="wrapper">
-      <Header />
-      <Main />
+      <Header headreState={props.state.header} updateSearchText={props.updateSearchText} onSearchInfo={props.onSearchInfo} />
     </div>
   );
 }
