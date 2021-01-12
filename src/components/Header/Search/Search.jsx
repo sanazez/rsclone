@@ -29,7 +29,18 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function CustomizedInputBase() {
+let searchElement = React.createRef();
+
+
+export default function CustomizedInputBase(props) {
+    const onSearchChange = () => {
+        const text = searchElement.current.value;
+        props.updateSearchText(text)
+    }
+    const onSearchInfo = () => {
+        console.log(props)
+        props.onSearchInfo();
+    }
     const styles = useStyles();
     return (
         <Paper component="form" className={styles.root}>
@@ -38,8 +49,11 @@ export default function CustomizedInputBase() {
                 className={`${styles.input} ${classes.search}`}
                 placeholder="Title, companies, expertise or benefits"
                 inputProps={{ 'aria-label': 'search jobs' }}
+                value={props.searchText}
+                inputRef={searchElement}
+                onChange={onSearchChange}
             />
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={onSearchInfo}>
                 Search
             </Button>
         </Paper >

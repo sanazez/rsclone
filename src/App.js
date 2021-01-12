@@ -1,12 +1,13 @@
 
 import './App.css';
-import { Button } from '@material-ui/core';
 import Header from './components/Header/Header';
 
-function App() {
+
+
+const App = (props) => {
   return (
     <div className="wrapper">
-      <Header />
+      <Header headreState={props.state.header} updateSearchText={props.updateSearchText} onSearchInfo={props.onSearchInfo} />
     </div>
   );
 }

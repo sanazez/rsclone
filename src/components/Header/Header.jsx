@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Header.module.css';
 import CustomizedInputBase from './Search/Search.jsx';
-const Header = () => {
+const Header = (props) => {
     return (
         <header className={classes.header}>
             <div className={classes.logo}>
@@ -10,7 +10,7 @@ const Header = () => {
                 </a>
             </div>
             <div className={classes.wrapper_search}>
-                <CustomizedInputBase />
+                <CustomizedInputBase searchText={props.headreState.searchText} updateSearchText={props.updateSearchText} onSearchInfo={props.onSearchInfo} />
             </div>
         </header>
     )
