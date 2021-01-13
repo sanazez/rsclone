@@ -3,7 +3,8 @@ let state = {
     header: {
         searchText: 'reactdasda',
         searchResults: [],
-    }
+    },
+    main: []
 }
 export const updateSearchText = (newText) => {
     state.header.searchText = newText;

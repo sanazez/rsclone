@@ -9,6 +9,7 @@ const App = (props) => {
   return (
     <div className="wrapper">
       <Header headreState={props.state.header} updateSearchText={props.updateSearchText} onSearchInfo={props.onSearchInfo} />
+      <Main mainState={props.state.main}/>
     </div>
   );
 }

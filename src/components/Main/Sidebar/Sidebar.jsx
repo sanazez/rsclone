@@ -27,7 +27,7 @@ const Sidebar = (props) => {
         <TextField id="input-with-icon-grid" label="City, state or country" />
       </Grid>
     </Grid>
-    <RadioGroup aria-label="city" name="city">
+    <RadioGroup className={classes.radioBtn} aria-label="city" name="city">
         <FormControlLabel value="London" control={<Radio color="primary" />} label="London" />
         <FormControlLabel value="Amsterdam" control={<Radio color="primary" />} label="Amsterdam" />
         <FormControlLabel value="New-York" control={<Radio color="primary" />} label="New York" />

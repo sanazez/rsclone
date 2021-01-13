@@ -14,14 +14,17 @@ const rerender = () => {
     document.getElementById('root')
   );
 }
-rerender();
+// rerender();
 
 async function callAPI() {
-  let data = await fetch("http://localhost:9000/testAPI?search=sanazez")
-  data = await data.json()
-  console.log(data)
+  let data = await fetch("http://localhost:9000/testAPI");
+  data = await data.json();
+  console.log(data);
+  state.main = data;
+  await rerender();
 }
 callAPI();
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

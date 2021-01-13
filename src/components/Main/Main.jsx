@@ -6,7 +6,7 @@ import Content from './Content/Content';
 const Main = (props) => {
   return <main className={classes.main}>
     <Sidebar />
-    <Content />
+    <Content mainState={props.mainState}/>
   </main>
 }
 
