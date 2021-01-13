@@ -8,7 +8,8 @@ import Main from './components/Main/Main';
 const App = (props) => {
   return (
     <div className="wrapper">
-      <Header headreState={props.state.header} updateSearchText={props.updateSearchText} onSearchInfo={props.onSearchInfo} />
+      <Header dispatch={props.store.dispatch} state={props.state.headerElement} />
+      <Main />
     </div>
   );
 }
