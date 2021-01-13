@@ -10,7 +10,7 @@ const Header = (props) => {
                 </a>
             </div>
             <div className={classes.wrapper_search}>
-                <CustomizedInputBase searchText={props.headreState.searchText} updateSearchText={props.updateSearchText} onSearchInfo={props.onSearchInfo} />
+                <CustomizedInputBase searchText={props.state.searchText} dispatch={props.dispatch} />
             </div>
         </header>
     )
