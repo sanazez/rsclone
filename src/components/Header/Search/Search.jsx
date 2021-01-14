@@ -5,7 +5,7 @@ import InputBase from '@material-ui/core/InputBase';
 import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 import { Button } from '@material-ui/core';
 import classes from './Search.module.css';
-import { updateSearchTextActionCreater, searchJobsActionCreater } from '../../../redux/header-reducer'
+import { updateSearchTextActionCreater, searchJobsActionCreater } from '../../../redux/main-reducer'
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: '2px 4px',

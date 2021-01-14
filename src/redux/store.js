@@ -1,11 +1,10 @@
 import { createStore, combineReducers } from 'redux';
-import headerReducer from './header-reducer';
-
-
+import mainReducer from './main-reducer';
 
 const reducers = combineReducers({
-    headerElement: headerReducer
+    mainElement: mainReducer
 });
-const store = createStore(reducers);
-export default store;
 
+const store = createStore(reducers);
+
+export default store;

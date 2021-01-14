@@ -13,24 +13,15 @@ const rerender = (state) => {
     document.getElementById('root')
   );
 }
-// rerender();
-
-async function callAPI() {
-  let data = await fetch("http://localhost:9000/testAPI");
-  data = await data.json();
-  console.log(data);
-  state.main = data;
-  await rerender();
-}
-callAPI();
-
 
 rerender(store.getState());
-
-store.subscribe(() => {
-  let state = store.getState();
-  rerender(state);
-});
+setTimeout(() => {
+  rerender(store.getState());
+}, 5000);
+// store.subscribe(() => {
+//   let currentValue = store.getState();
+//   rerender(currentValue);
+// });
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
