@@ -8,7 +8,7 @@ import Main from './components/Main/Main';
 const App = (props) => {
   return (
     <div className="wrapper">
-      <Header dispatch={props.store.dispatch} state={props.state.headerElement} />
+      <Header store={props.store} />
       <Main />
     </div>
   );

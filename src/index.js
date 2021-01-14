@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './redux/store'
+import store from './redux/store';
+
+
+
 
 const rerender = (state) => {
   ReactDOM.render(
@@ -16,7 +19,9 @@ const rerender = (state) => {
 
 rerender(store.getState());
 
+
 store.subscribe(() => {
+  console.log('Перерендер произошел!!!!')
   let state = store.getState();
   rerender(state);
 });
