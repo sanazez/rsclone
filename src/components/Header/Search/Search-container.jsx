@@ -1,22 +1,26 @@
 import React from 'react';
 import { updateSearchTextActionCreater, searchJobsActionCreater } from '../../../redux/header-reducer';
 import SearchHeader from './Search'
+import { connect } from 'react-redux';
 
 
-
-const SearchHeaderContainer = (props) => {
-    const searchChange = (text) => {
-        let action = updateSearchTextActionCreater(text);
-        props.store.dispatch(action);
+const mapStateToProps = (state) => {
+    return {
+        searchText: state.headerElement.searchText
     }
-
-    const searchJobs = () => {
-        let action = searchJobsActionCreater();
-        props.store.dispatch(action);
-    }
-
-    return (
-        <SearchHeader searchJobs={searchJobs} searchChange={searchChange} />
-    );
 }
-export default SearchHeaderContainer;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        searchJobs: () => {
+            let action = searchJobsActionCreater();
+            dispatch(action);
+        },
+        searchChange: (text) => {
+            let action = updateSearchTextActionCreater(text);
+            dispatch(action);
+        }
+    }
+}
+const SearchHeaderContainer = connect(mapStateToProps, mapDispatchToProps)(SearchHeader);
+export default SearchHeaderContainer; 
