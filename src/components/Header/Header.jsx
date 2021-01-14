@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './Header.module.css';
 import SearchHeaderContainer from './Search/Search-container';
 const Header = (props) => {
-    console.log(props)
     return (
         <header className={classes.header}>
             <div className={classes.logo}>

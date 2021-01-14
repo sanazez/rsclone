@@ -6,9 +6,10 @@ import Main from './components/Main/Main';
 
 
 const App = (props) => {
+  console.log('ПЕРЕРЕНДЕР!!!')
   return (
     <div className="wrapper">
-      <Header store={props.store} />
+      <Header />
       <Main />
     </div>
   );

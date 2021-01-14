@@ -6,6 +6,6 @@ import headerReducer from './header-reducer';
 const reducers = combineReducers({
     headerElement: headerReducer
 });
-const store = createStore(reducers);
+let store = createStore(reducers);
 export default store;
 

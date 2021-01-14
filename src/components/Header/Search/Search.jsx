@@ -59,6 +59,7 @@ const SearchHeader = (props) => {
                 value={props.searchText}
                 inputRef={searchElement}
                 onChange={onSearchChange}
+
             />
             <Button variant="contained" color="primary" onClick={onSearchJobs}>
                 Search
