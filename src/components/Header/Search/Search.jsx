@@ -5,7 +5,6 @@ import InputBase from '@material-ui/core/InputBase';
 import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 import { Button } from '@material-ui/core';
 import classes from './Search.module.css';
-import { updateSearchTextActionCreater, searchJobsActionCreater } from '../../../redux/main-reducer'
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: '2px 4px',
@@ -32,22 +31,20 @@ const useStyles = makeStyles((theme) => ({
 
 let searchElement = React.createRef();
 
-export default function CustomizedInputBase(props) {
+const SearchHeader = (props) => {
     const onSearchChange = () => {
         const text = searchElement.current.value;
-        let action = updateSearchTextActionCreater(text);
-        props.dispatch(action);
+        props.searchChange(text);
     }
 
-    const onSearchInfo = () => {
-        let action = searchJobsActionCreater();
-        props.dispatch(action);
+    const onSearchJobs = () => {
+        props.searchJobs();
     }
 
     const offPreventDefaultForm = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            onSearchInfo();
+            onSearchJobs();
         }
     }
 
@@ -62,10 +59,12 @@ export default function CustomizedInputBase(props) {
                 value={props.searchText}
                 inputRef={searchElement}
                 onChange={onSearchChange}
+
             />
-            <Button variant="contained" color="primary" onClick={onSearchInfo}>
+            <Button variant="contained" color="primary" onClick={onSearchJobs}>
                 Search
             </Button>
         </Paper >
     );
 }
+export default SearchHeader;

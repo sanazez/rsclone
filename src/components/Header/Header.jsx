@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Header.module.css';
-import CustomizedInputBase from './Search/Search.jsx';
+import SearchHeaderContainer from './Search/Search-container';
 const Header = (props) => {
     return (
         <header className={classes.header}>
@@ -10,7 +10,7 @@ const Header = (props) => {
                 </a>
             </div>
             <div className={classes.wrapper_search}>
-                <CustomizedInputBase searchText={props.state.searchText} dispatch={props.dispatch} />
+                <SearchHeaderContainer store={props.store} />
             </div>
         </header>
     )

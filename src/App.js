@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import Main from './components/Main/Main';
+import MainContainer from './components/Main/MainContainer';
 
 
 
 const App = (props) => {
-  console.log(props);
+  console.log('ПЕРЕРЕНДЕР!!!')
   return (
     <div className="wrapper">
-      <Header dispatch={props.store.dispatch} state={props.state.mainElement} />
-      <Main dispatch={props.store.dispatch} state={props.state.mainElement}/>
+      <Header />
+      <MainContainer />
     </div>
   );
 }

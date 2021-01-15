@@ -3,25 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './redux/store'
+import store from './redux/store';
 
-const rerender = (state) => {
-  ReactDOM.render(
-    <React.StrictMode>
-      <App store={store} state={state} />
-    </React.StrictMode>,
-    document.getElementById('root')
-  );
-}
+import { Provider } from 'react-redux';
 
-rerender(store.getState());
-setTimeout(() => {
-  rerender(store.getState());
-}, 5000);
-// store.subscribe(() => {
-//   let currentValue = store.getState();
-//   rerender(currentValue);
-// });
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

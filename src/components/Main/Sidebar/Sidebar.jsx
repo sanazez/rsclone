@@ -8,7 +8,7 @@ import PublicIcon from '@material-ui/icons/Public';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
-const Sidebar = (props) => {
+const Sidebar = () => {
   // const handleChange = (event) => {
   //   setState({ ...state, [event.target.name]: event.target.checked });
   // };

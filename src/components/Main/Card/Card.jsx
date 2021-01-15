@@ -4,7 +4,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-// import classes from './Card.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import PublicIcon from '@material-ui/icons/Public';
@@ -67,55 +66,43 @@ const useStyles = makeStyles({
     marginRight: 3
   }
 });
-function countDays(creatureDate) {
-  let res = Date.now() - Date.parse(creatureDate);
-  res /= (1000 * 60 * 60 *24);
-  if (res < 1) {
-    return 'today'
-  }
-  return (Math.round(res) === 1) ? '1 day ago' : `${Math.round(res)} days ago`
-}
 
 const JobCard = (props) => {
   const classes = useStyles();
-
-  console.log(props);
-  if (props.state && props.state.length) {
-    return (
-      <Card className={classes.root}>
-        <CardActionArea className={classes.actionArea}>
-          <CardMedia
-            className={classes.cardImg}
-            component="img"
-            alt="Company logo"
-            image={props.state[props.cardIndex].company_logo}
-          />
-          <CardContent>
-            <Typography className={classes.companyName} variant="body2" color="textSecondary" component="p">
-              {props.state[props.cardIndex].company}
-            </Typography>
-            <Typography className={classes.positionName} gutterBottom variant="h5" component="h2">
-              {props.state[props.cardIndex].title}
-            </Typography>
-            <Typography className={classes.jobType} variant="body2" color="textSecondary" component="p">
-              {props.state[props.cardIndex].type}
-            </Typography>
-          </CardContent>
-          <CardContent className={classes.jobAdditional}>
-            <PublicIcon className={classes.jobLocation} color="disabled" fontSize="small" />
-            <Typography variant="caption" display="block" gutterBottom>
-              {props.state[props.cardIndex].location}
-            </Typography>
-            <AccessTimeIcon className={classes.jobUpdate} color="disabled" fontSize="small" />
-            <Typography variant="caption" display="block" gutterBottom>
-              {countDays(props.state[props.cardIndex].created_at)}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    );
+  if (!props.title) {
+    return <Card></Card>
   }
-  return <Card></Card>
+  return <Card className={classes.root}>
+    <CardActionArea className={classes.actionArea}>
+      <CardMedia
+        className={classes.cardImg}
+        component="img"
+        alt="Company logo"
+        image={props.logo}
+      />
+      <CardContent>
+        <Typography className={classes.companyName} variant="body2" color="textSecondary" component="p">
+          {props.company}
+        </Typography>
+        <Typography className={classes.positionName} gutterBottom variant="h5" component="h2">
+          {props.title}
+        </Typography>
+        <Typography className={classes.jobType} variant="body2" color="textSecondary" component="p">
+          {props.type}
+        </Typography>
+      </CardContent>
+      <CardContent className={classes.jobAdditional}>
+        <PublicIcon className={classes.jobLocation} color="disabled" fontSize="small" />
+        <Typography variant="caption" display="block" gutterBottom>
+          {props.location}
+        </Typography>
+        <AccessTimeIcon className={classes.jobUpdate} color="disabled" fontSize="small" />
+        <Typography variant="caption" display="block" gutterBottom>
+          {props.created}
+        </Typography>
+      </CardContent>
+    </CardActionArea>
+  </Card>
 }
 
 export default JobCard;
