@@ -8,7 +8,7 @@ import PublicIcon from '@material-ui/icons/Public';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
-const Sidebar = (props) => {
+const Sidebar = () => {
   // const handleChange = (event) => {
   //   setState({ ...state, [event.target.name]: event.target.checked });
   // };
@@ -27,7 +27,7 @@ const Sidebar = (props) => {
         <TextField id="input-with-icon-grid" label="City, state or country" />
       </Grid>
     </Grid>
-    <RadioGroup aria-label="city" name="city">
+    <RadioGroup className={classes.radioBtn} aria-label="city" name="city">
         <FormControlLabel value="London" control={<Radio color="primary" />} label="London" />
         <FormControlLabel value="Amsterdam" control={<Radio color="primary" />} label="Amsterdam" />
         <FormControlLabel value="New-York" control={<Radio color="primary" />} label="New York" />

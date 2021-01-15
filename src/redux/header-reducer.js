@@ -14,16 +14,18 @@ const requestJobs = async (state) => {
     console.log(state)
 }
 
-const requestJobsFirstOnload = async (state) => {
+const requestJobsFirstOnload = async (param) => {
     let data = await fetch(`http://localhost:9000/`);
     data = await data.json()
-    state.searchResults = data;
+    param = data;
+    console.log(param);
 
 }
 const headerReducer = (state = initialState, action) => {
+    let stateCopy;
     switch (action.type) {
         case UPDATE_SEARCH_TEXT: {
-            let stateCopy = { ...state };
+            stateCopy = { ...state};
             stateCopy.searchText = action.newText;
             return stateCopy;
         }
@@ -32,22 +34,14 @@ const headerReducer = (state = initialState, action) => {
             return state;
         }
         case LOAD_ALL: {
-            requestJobsFirstOnload(state);
-            return state;
+            stateCopy = { ...state,
+                searchResults: [...state.searchResults]
+            };
+            requestJobsFirstOnload(stateCopy.searchResults);
+            return stateCopy;
         }
         default: return state
     }
-    /* 
-        if (action.type === UPDATE_SEARCH_TEXT) {
-            state.searchText = action.newText;
-            console.log(action.newText)
-        } else if (action.type === SEARCH_JOBS) {
-            requestJobs(state)
-        }
-        else if (action.type === LOAD_ALL) {
-            requestJobsFirstOnload(state);
-        }
-        return state; */
 }
 
 export const updateSearchTextActionCreater = (text) => {
