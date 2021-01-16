@@ -1,25 +1,11 @@
 const UPDATE_SEARCH_TEXT = 'UPDATE-SEARCH-TEXT';
-const SEARCH_JOBS = 'SEARCH-JOBS';
-const LOAD_ALL = 'LOAD-ALL';
+const LOAD_JOBS = 'LOAD-JOBS';
 
 const initialState = {
-    searchText: 'react',
+    searchText: '',
     searchResults: [],
 }
 
-const requestJobs = async (state) => {
-    let data = await fetch(`http://localhost:9000/testAPI/search?search=${state.searchText}`);
-    data = await data.json()
-    state.searchResults = data;
-    console.log(state)
-}
-
-const requestJobsFirstOnload = async (state) => {
-    let data = await fetch(`http://localhost:9000/`);
-    data = await data.json()
-    state.searchResults = data;
-
-}
 const headerReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_SEARCH_TEXT: {
@@ -27,27 +13,15 @@ const headerReducer = (state = initialState, action) => {
             stateCopy.searchText = action.newText;
             return stateCopy;
         }
-        case SEARCH_JOBS: {
-            requestJobs(state);
-            return state;
-        }
-        case LOAD_ALL: {
-            requestJobsFirstOnload(state);
-            return state;
+
+        case LOAD_JOBS: {
+            let stateCopy = { ...state };
+            stateCopy.searchResults = action.jobs;
+            return stateCopy;
         }
         default: return state
     }
-    /* 
-        if (action.type === UPDATE_SEARCH_TEXT) {
-            state.searchText = action.newText;
-            console.log(action.newText)
-        } else if (action.type === SEARCH_JOBS) {
-            requestJobs(state)
-        }
-        else if (action.type === LOAD_ALL) {
-            requestJobsFirstOnload(state);
-        }
-        return state; */
+
 }
 
 export const updateSearchTextActionCreater = (text) => {
@@ -57,15 +31,11 @@ export const updateSearchTextActionCreater = (text) => {
     }
 }
 
-export const loadAllActionCreater = () => {
+export const loadAllActionCreater = (jobs) => {
     return {
-        type: LOAD_ALL
+        type: LOAD_JOBS,
+        jobs: jobs
     }
 }
 
-export const searchJobsActionCreater = () => {
-    return {
-        type: SEARCH_JOBS,
-    }
-}
 export default headerReducer;
