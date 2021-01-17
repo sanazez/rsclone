@@ -18,7 +18,7 @@ let mapStateToProps = (state, props) => {
       company: state.headerElement.searchResults[props.cardIndex].company_name,
       title: state.headerElement.searchResults[props.cardIndex].title,
       type: state.headerElement.searchResults[props.cardIndex].job_type,
-      location: state.headerElement.searchResults[props.cardIndex].candidate_required_location,
+      location: state.headerElement.searchResults[props.cardIndex].location,
       created: countDays(state.headerElement.searchResults[props.cardIndex].publication_date)
     }
   }
