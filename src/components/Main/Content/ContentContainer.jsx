@@ -5,7 +5,7 @@ import Content from './Content';
 const countArr = (state) => {
   if (!state.searchResults) {
     return {
-      arr: []
+      arr: [1, 2, 3]
     }
   }
   let newArr = state.searchResults.map((val, index) => index);

@@ -12,7 +12,7 @@ function countDays(creatureDate) {
 }
 
 let getInfoForCard = (state, props) => {
-  console.log(state.searchResults);
+  console.log(state);
   if (state.searchResults && state.searchResults.length) {
     return {
       logo: state.searchResults[props.cardIndex].company_logo,

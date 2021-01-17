@@ -14,12 +14,10 @@ const requestJobs = async (state) => {
     console.log(state)
 }
 
-const requestJobsFirstOnload = async (param) => {
+const requestJobsFirstOnload = async () => {
     let data = await fetch(`http://localhost:9000/`);
     data = await data.json()
-    param = data;
-    console.log(param);
-
+    return data;
 }
 const headerReducer = (state = initialState, action) => {
     let stateCopy;
@@ -30,14 +28,16 @@ const headerReducer = (state = initialState, action) => {
             return stateCopy;
         }
         case SEARCH_JOBS: {
-            requestJobs(state);
-            return state;
-        }
-        case LOAD_ALL: {
             stateCopy = { ...state,
                 searchResults: [...state.searchResults]
             };
-            requestJobsFirstOnload(stateCopy.searchResults);
+            requestJobs(stateCopy);
+            return stateCopy;
+        }
+        case LOAD_ALL: {
+            stateCopy = { ...state
+            };
+            requestJobsFirstOnload().then(res => { stateCopy.searchResults = res});
             return stateCopy;
         }
         default: return state

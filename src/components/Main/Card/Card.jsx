@@ -68,6 +68,7 @@ const useStyles = makeStyles({
 });
 
 const JobCard = (props) => {
+  console.log(props);
   const classes = useStyles();
   if (!props.title) {
     return <Card></Card>
