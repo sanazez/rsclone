@@ -9,14 +9,19 @@ class SearcContainer extends React.Component {
     componentDidMount() {
         axios.get(`http://localhost:9000/`)
             .then(res => {
-                this.props.setJobs(res.data);
+                console.log(res.data)
+                this.props.setJobs(res.data.jobs);
             })
     }
 
     searchJobsOnClick = () => {
         axios.get(`http://localhost:9000/testAPI/search?search=${this.props.searchText}`)
             .then(res => {
-                this.props.setJobs(res.data);
+                res.data.jobs.forEach(job => {
+                    job.company_logo_url = `https://remotive.io/job/${job.id}/logo`;
+                })
+                console.log(res.data)
+                this.props.setJobs(res.data.jobs);
             })
 
     }
