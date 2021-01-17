@@ -2,18 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Content from './Content';
 
-const countArr = (state) => {
-  if (!state.searchResults) {
-    return {
-      arr: []
-    }
-  }
-  let newArr = state.searchResults.map((val, index) => index);
-  console.log(newArr);
+const mapStateToProps = (state) => {
   return {
-    arr: newArr
+    arr: state.headerElement.searchResults
   }
 }
-const ContentContainer = connect(countArr)(Content);
+const ContentContainer = connect(mapStateToProps)(Content);
 
 export default ContentContainer;

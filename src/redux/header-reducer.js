@@ -17,6 +17,7 @@ const headerReducer = (state = initialState, action) => {
         case LOAD_JOBS: {
             let stateCopy = { ...state };
             stateCopy.searchResults = action.jobs;
+            console.log(action.jobs)
             return stateCopy;
         }
         default: return state
