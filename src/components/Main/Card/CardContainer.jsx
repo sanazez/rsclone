@@ -11,20 +11,19 @@ function countDays(creatureDate) {
   return (Math.round(res) === 1) ? '1 day ago' : `${Math.round(res)} days ago`
 }
 
-let getInfoForCard = (state, props) => {
-  console.log(state);
-  if (state.searchResults && state.searchResults.length) {
+let mapStateToProps = (state, props) => {
+  if (state.headerElement.searchResults && state.headerElement.searchResults.length) {
     return {
-      logo: state.searchResults[props.cardIndex].company_logo,
-      company: state.searchResults[props.cardIndex].company,
-      title: state.searchResults[props.cardIndex].title,
-      type: state.searchResults[props.cardIndex].type,
-      location: state.searchResults[props.cardIndex].location,
-      created: countDays(state.searchResults[props.cardIndex].created_at)
+      logo: state.headerElement.searchResults[props.cardIndex].company_logo_url,
+      company: state.headerElement.searchResults[props.cardIndex].company_name,
+      title: state.headerElement.searchResults[props.cardIndex].title,
+      type: state.headerElement.searchResults[props.cardIndex].job_type,
+      location: state.headerElement.searchResults[props.cardIndex].location,
+      created: countDays(state.headerElement.searchResults[props.cardIndex].publication_date)
     }
   }
   return {}
 }
 
-const JobCardContainer = connect(getInfoForCard)(JobCard)
+const JobCardContainer = connect(mapStateToProps)(JobCard)
 export default JobCardContainer;

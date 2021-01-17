@@ -47,7 +47,6 @@ const SearchHeader = (props) => {
             onSearchJobs();
         }
     }
-
     const styles = useStyles();
     return (
         <Paper component="form" onKeyPress={offPreventDefaultForm} className={styles.root} >

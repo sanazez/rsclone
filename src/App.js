@@ -1,16 +1,15 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import MainContainer from './components/Main/MainContainer';
+import Main from './components/Main/Main';
 
 
 
 const App = (props) => {
-  console.log('ПЕРЕРЕНДЕР!!!')
   return (
     <div className="wrapper">
       <Header />
-      <MainContainer />
+      <Main />
     </div>
   );
 }
