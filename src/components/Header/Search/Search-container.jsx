@@ -9,7 +9,6 @@ class SearcContainer extends React.Component {
     componentDidMount() {
         axios.get(`http://localhost:9000/`)
             .then(res => {
-                console.log(res.data)
                 this.props.setJobs(res.data);
             })
     }

@@ -7,13 +7,22 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import PublicIcon from '@material-ui/icons/Public';
+import Skeleton from '@material-ui/lab/Skeleton';
+import noLogo from '../../../img/no-logo.png';
 
 const useStyles = makeStyles({
   root: {
     height: 115,
     marginTop: 30,
     maxWidth: 790
-
+  },
+  preloader: {
+    height: 115,
+    marginTop: 30,
+    maxWidth: 790
+  },
+  preloaderContent: {
+    height: '100%'
   },
   actionArea: {
     display: 'flex',
@@ -70,7 +79,9 @@ const useStyles = makeStyles({
 const JobCard = (props) => {
   const classes = useStyles();
   if (!props.title) {
-    return <Card></Card>
+    return <Card className={classes.preloader} >
+      <Skeleton className={classes.preloaderContent} variant="text" animation="wave" />
+    </Card>
   }
   return <Card className={classes.root}>
     <CardActionArea className={classes.actionArea}>
@@ -78,7 +89,7 @@ const JobCard = (props) => {
         className={classes.cardImg}
         component="img"
         alt="Company logo"
-        image={props.logo}
+        image={props.logo ? props.logo : noLogo}
       />
       <CardContent>
         <Typography className={classes.companyName} variant="body2" color="textSecondary" component="p">
