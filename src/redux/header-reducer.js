@@ -1,33 +1,42 @@
 const UPDATE_SEARCH_TEXT = 'UPDATE-SEARCH-TEXT';
 const LOAD_JOBS = 'LOAD-JOBS';
 const CHANGE_PAGE = 'CHANGE_PAGE';
+const CHANGE_CITY = 'CHANGE-CITY';
 
 const initialState = {
     searchText: '',
     searchResults: [],
-    allResults: []
+    allResults: [],
+    allJobs: [],
+    currentCity: '',
+    searchCity: ''
 }
 
 const headerReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_SEARCH_TEXT: {
-            let stateCopy = { ...state };
+            let stateCopy = {...state};
             stateCopy.searchText = action.newText;
             return stateCopy;
         }
 
         case LOAD_JOBS: {
-            let stateCopy = { ...state };
-            stateCopy.allResults = action.jobs;
+            let stateCopy = {...state};
+            stateCopy.allResults = [...action.jobs];
+            stateCopy.allJobs = [...action.jobs];
             stateCopy.searchResults = [];
-            for (let i = 0; i < 5; i++) {
+            let startNumber = 5;
+            if (stateCopy.allResults.length < 5) {
+                startNumber = stateCopy.allJobs.length
+            }
+            for (let i = 0; i < startNumber; i++) {
                 stateCopy.searchResults.push(stateCopy.allResults[i]);
             }
             return stateCopy;
         }
 
         case CHANGE_PAGE: {
-            let stateCopy = { ...state };
+            let stateCopy = {...state};
             stateCopy.allResults = [...state.allResults];
             stateCopy.searchResults = [];
             let startValue = (action.page - 1) * 5;
@@ -40,9 +49,36 @@ const headerReducer = (state = initialState, action) => {
             }
             return stateCopy;
         }
-        default: return state
-    }
 
+        case CHANGE_CITY: {
+            let stateCopy = {...state};
+            stateCopy.currentCity = action.city;
+            let filterJobs = state.allJobs.filter(job => {
+                return job.location === action.city;
+            });
+            if (filterJobs.length) {
+                stateCopy.allResults = [...filterJobs];
+                stateCopy.searchResults = [];
+                let startNumber = 5;
+                if (stateCopy.allResults.length < 5) {
+                    startNumber = stateCopy.allResults.length
+                }
+                for (let i = 0; i < startNumber; i++) {
+                    stateCopy.searchResults.push(stateCopy.allResults[i]);
+                }
+            }
+            return stateCopy;
+        }
+        default:
+            return state
+    }
+}
+
+export const changeCityAC = (city) => {
+    return {
+        type: CHANGE_CITY,
+        city: city
+    }
 }
 
 export const updateSearchTextActionCreater = (text) => {

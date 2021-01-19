@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Header.module.css';
 import SearchHeaderContainer from './Search/Search-container';
+
 const Header = (props) => {
     return (
         <header className={classes.header}>
