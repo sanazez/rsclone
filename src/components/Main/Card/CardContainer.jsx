@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import JobCard from './Card';
 
 function countDays(creatureDate) {
@@ -19,7 +19,8 @@ let mapStateToProps = (state, props) => {
             title: state.headerElement.searchResults[props.cardIndex].title,
             type: state.headerElement.searchResults[props.cardIndex].job_type,
             location: state.headerElement.searchResults[props.cardIndex].location,
-            created: countDays(state.headerElement.searchResults[props.cardIndex].publication_date)
+            created: countDays(state.headerElement.searchResults[props.cardIndex].publication_date),
+            jobId: state.headerElement.searchResults[props.cardIndex].id
         }
     }
     return {}

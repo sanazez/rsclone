@@ -4,6 +4,7 @@ import Content from './Content';
 import { changePageCreater } from '../../../redux/header-reducer';
 
 const mapStateToProps = (state) => {
+  console.log(state);
   if (!state.headerElement.searchResults || !state.headerElement.searchResults.length) {
     return {
       arr: [1, 2, 3, 4, 5],

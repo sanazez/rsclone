@@ -1,15 +1,18 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-
+import MainPage from './components/MainPage/MainPage';
+import JobProfileContainer from './components/JobPage/JobContainer';
+import { Route } from 'react-router-dom'; 
+import { Switch } from 'react-router-dom';
 
 
 const App = (props) => {
   return (
     <div className="wrapper">
-      <Header />
-      <Main />
+      <Switch>
+        <Route exact path='/' render={() => <MainPage />} />
+        <Route exact path='/job/:jobId' render={() => <JobProfileContainer />} />
+      </Switch>
     </div>
   );
 }
