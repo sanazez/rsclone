@@ -9,6 +9,7 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import PublicIcon from '@material-ui/icons/Public';
 import Skeleton from '@material-ui/lab/Skeleton';
 import noLogo from '../../../img/no-logo.png';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -78,42 +79,45 @@ const useStyles = makeStyles({
 
 const JobCard = (props) => {
   const classes = useStyles();
+
   if (!props.title) {
     return <Card className={classes.preloader} >
       <Skeleton className={classes.preloaderContent} variant="text" animation="wave" />
     </Card>
   }
-  return <Card className={classes.root}>
-    <CardActionArea className={classes.actionArea}>
-      <CardMedia
-        className={classes.cardImg}
-        component="img"
-        alt="Company logo"
-        image={props.logo ? props.logo : noLogo}
-      />
-      <CardContent>
-        <Typography className={classes.companyName} variant="body2" color="textSecondary" component="p">
-          {props.company}
-        </Typography>
-        <Typography className={classes.positionName} gutterBottom variant="h5" component="h2">
-          {props.title}
-        </Typography>
-        <Typography className={classes.jobType} variant="body2" color="textSecondary" component="p">
-          {props.type}
-        </Typography>
-      </CardContent>
-      <CardContent className={classes.jobAdditional}>
-        <PublicIcon className={classes.jobLocation} color="disabled" fontSize="small" />
-        <Typography variant="caption" display="block" gutterBottom>
-          {props.location}
-        </Typography>
-        <AccessTimeIcon className={classes.jobUpdate} color="disabled" fontSize="small" />
-        <Typography variant="caption" display="block" gutterBottom>
-          {props.created}
-        </Typography>
-      </CardContent>
-    </CardActionArea>
-  </Card>
+  return <NavLink to={`/job/${props.jobId}`}>
+  <Card className={classes.root}>
+      <CardActionArea className={classes.actionArea}>
+        <CardMedia
+          className={classes.cardImg}
+          component="img"
+          alt="Company logo"
+          image={props.logo ? props.logo : noLogo}
+        />
+        <CardContent>
+          <Typography className={classes.companyName} variant="body2" color="textSecondary" component="p">
+            {props.company}
+          </Typography>
+          <Typography className={classes.positionName} gutterBottom variant="h5" component="h2">
+            {props.title}
+          </Typography>
+          <Typography className={classes.jobType} variant="body2" color="textSecondary" component="p">
+            {props.type}
+          </Typography>
+        </CardContent>
+        <CardContent className={classes.jobAdditional}>
+          <PublicIcon className={classes.jobLocation} color="disabled" fontSize="small" />
+          <Typography variant="caption" display="block" gutterBottom>
+            {props.location}
+          </Typography>
+          <AccessTimeIcon className={classes.jobUpdate} color="disabled" fontSize="small" />
+          <Typography variant="caption" display="block" gutterBottom>
+            {props.created}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+</NavLink>
 }
 
 export default JobCard;

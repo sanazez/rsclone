@@ -1,11 +1,13 @@
 const UPDATE_SEARCH_TEXT = 'UPDATE-SEARCH-TEXT';
 const LOAD_JOBS = 'LOAD-JOBS';
 const CHANGE_PAGE = 'CHANGE_PAGE';
+const LOAD_PROFILE = 'LOAD_PROFILE';
 
 const initialState = {
     searchText: '',
     searchResults: [],
-    allResults: []
+    allResults: [],
+    jobPage: []
 }
 
 const headerReducer = (state = initialState, action) => {
@@ -40,6 +42,13 @@ const headerReducer = (state = initialState, action) => {
             }
             return stateCopy;
         }
+
+        case LOAD_PROFILE: {
+            let stateCopy = { ...state };
+            stateCopy.jobPage = action.info;;
+            return stateCopy;
+        }
+
         default: return state
     }
 
@@ -66,5 +75,11 @@ export const changePageCreater = (value) => {
     }
 }
 
+export const loadJobProfileActionCreater = (info) => {
+    return {
+        type: LOAD_PROFILE,
+        info: info
+    }
+}
 
 export default headerReducer;
