@@ -5,11 +5,16 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import CardMedia from '@material-ui/core/CardMedia';
 import noLogo from '../../img/no-logo.png';
 import PublicIcon from '@material-ui/icons/Public';
-import { FormHelperText } from '@material-ui/core';
-
+import Chip from '@material-ui/core/Chip';
+import HowToRegIcon from '@material-ui/icons/HowToReg';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles({
   root: {
+    display: 'flex',
     maxWidth: 1200,
     margin: '0 auto'
   },
@@ -19,29 +24,44 @@ const useStyles = makeStyles({
   profileMain: {
     maxWidth: 965,
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    margin: '0 auto',
+    padding: '50px 15px'
   },
   profileTitle: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 5,
   },
   profileTitleText: {
     margin: '0 10px 0 0'
   },
   profileDate: {
-    display: 'flex'
+    display: 'flex',
+    marginBottom: 20,
   },
   profileCompany: {
-    display: 'flex'
+    display: 'flex',
+    marginBottom: 25
   },
   profileCompanyTitle: {
 
+  },
+  profileSkills: {
+    marginBottom: 20
+  },
+  profileSkillsTitle: {
+
+  },
+  profileSkillsBlock: {
+    marginRight: 8,
+    marginBottom: 8
   },
   profileLocation: {
     display: 'flex'
   },
   profileDescription: {
-
+    padding: 20
   },
   jobType: {
     color: '#334680',
@@ -54,26 +74,25 @@ const useStyles = makeStyles({
   },
   cardImg: {
     display: 'flex',
+    backgroundColor: 'white',
     width: 90,
     height: 90,
     objectFit: 'contain',
-    borderRadius: 4
+    borderRadius: 4,
+    marginRight: 10
   },
-  header: {
-    maxWidth: 1200,
-    width: '100%',
-    margin: '0 auto',
-    padding: '32px 12px 0'
+  contactInfo: {
+    flexDirection: 'column'
   },
-  logo: {
-    fontFamily: '"Poppins", sans - serif',
-    fontSize: '1.7rem',
+  contactInfoTel: {
+    display: 'flex',
+    flexDirection: 'column'
   },
-  logo_company: {
-    fontWeight: 900
+  profileAccordion: {
+    marginBottom: 10
   },
-  logo_text: {
-    fontWeight: 200
+  tmpl_hh_wrapper: {
+    maxWidth: '100%'
   }
 });
 
@@ -84,15 +103,16 @@ const JobProfile = (props) => {
     return <article></article>
   }
   let logo = props.profileInfo.employer.logo_urls;
+  const phones = () => {
+    if (props.profileInfo.contacts && props.profileInfo.contacts.phones && props.profileInfo.contacts.phones.length) {
+      return props.profileInfo.contacts.phones.map((val, ind) => {
+        return <a href={`tel:+${val.country}${val.city}${val.number}`} key={ind}>{`+${val.country} (${val.city}) ${val.number}`}</a>
+      })
+    }
+  }
   return <article className={classes.root}>
-    <header className={classes.header}>
-      <div className={classes.logo}>
-        <a href="/">
-          <span className={classes.logo_company}>Github</span> <span className={classes.logo_text}>Jobs</span>
-        </a>
-      </div>
-    </header>
-    <aside className={classes.profileSidebar}></aside>
+    <aside className={classes.profileSidebar}>
+    </aside>
     <main className={classes.profileMain}>
       <div className={classes.profileTitle}>
         <Typography className={classes.profileTitleText} variant="h4" gutterBottom>
@@ -127,7 +147,63 @@ const JobProfile = (props) => {
           </div>
         </div>
       </div>
-      <div className={classes.profileDescription} dangerouslySetInnerHTML={{ __html: props.profileInfo.description }}></div>
+      <div className={classes.profileSkills}>
+        <Typography className={classes.profileSkillsTitle} gutterBottom variant="h6" component="h6">
+          {props.profileInfo.key_skills.length ? 'Ключевые навыки' : ''}
+        </Typography>
+        {props.profileInfo.key_skills.map((val, index) => <Chip className={classes.profileSkillsBlock} icon={<HowToRegIcon />} label={val.name} key={index} />)}
+      </div>
+      <div className={classes.profileAccordion}>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>Контакты</Typography>
+          </AccordionSummary>
+          <AccordionDetails className={classes.contactInfo}>
+            <Typography>
+              <a href={`mailto:${props.profileInfo.contacts ? (props.profileInfo.contacts.email ? props.profileInfo.contacts.email : '') : ''}`}>{`${props.profileInfo.contacts ? (props.profileInfo.contacts.email ? props.profileInfo.contacts.email : '') : ''}`}</a>
+            </Typography>
+            <Typography>
+              {`${props.profileInfo.contacts ? (props.profileInfo.contacts.name ? props.profileInfo.contacts.name : '') : ''}`}
+            </Typography>
+            <div className={classes.contactInfoTel}>
+              {phones()}
+            </div>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>Заработная плата</Typography>
+          </AccordionSummary>
+          <AccordionDetails className={classes.contactInfo}>
+            <Typography gutterBottom variant="h6" component="h6">
+              {props.profileInfo.salary ? `${props.profileInfo.salary.to ? '' : 'от'} ${props.profileInfo.salary.from ? props.profileInfo.salary.from : 'до'} ${props.profileInfo.salary.from && props.profileInfo.salary.to ? '-' : ' '} ${props.profileInfo.salary.to ? props.profileInfo.salary.to : ''}  ${props.profileInfo.salary.currency}` : 'Не указана'}
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>Требуемый опыт</Typography>
+          </AccordionSummary>
+          <AccordionDetails className={classes.contactInfo}>
+            <Typography gutterBottom variant="h6" component="h6">
+              {props.profileInfo.experience ? (props.profileInfo.experience.name ?  props.profileInfo.experience.name : '') : ''}
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+      <div className={classes.profileDescription} dangerouslySetInnerHTML={{ __html: props.profileInfo.branded_description ? props.profileInfo.branded_description : props.profileInfo.description }}></div>
     </main>
   </article>
 }
