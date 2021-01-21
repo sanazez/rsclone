@@ -7,7 +7,7 @@ import SidebarContainer from './Sidebar/Sidebar-container';
 const Main = (props) => {
     return <main className={classes.main}>
         <SidebarContainer/>
-        {/*  <ContentContainer/>*/}
+         <ContentContainer/>
     </main>
 }
 

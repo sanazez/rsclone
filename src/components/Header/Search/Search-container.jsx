@@ -7,9 +7,16 @@ import * as axios from 'axios';
 
 class SearchContainer extends React.Component {
     componentDidMount() {
-        axios.get(`http://localhost:9000/`)
+        // axios.get(`http://localhost:9000/`)
+        //     .then(res => {
+        //         this.props.setJobs(res.data);
+        //     })
+        axios.get(`http://localhost:9000/hh`)
             .then(res => {
-                this.props.setJobs(res.data);
+                console.log(res.data)
+                if (res.data.items.length) {
+                    this.props.setJobs(res.data.items)
+                }
             })
     }
 
@@ -24,7 +31,7 @@ class SearchContainer extends React.Component {
         axios.get(`http://localhost:9000/hh`)
             .then(res => {
                 console.log(res.data.items)
-                if (res.data.length) {
+                if (res.data.items.length) {
                     this.props.setJobs(res.data.items)
                 }
             })
