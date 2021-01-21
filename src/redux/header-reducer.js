@@ -114,6 +114,7 @@ export const updateSearchTextActionCreater = (text) => {
 }
 
 export const loadAllActionCreater = (jobs) => {
+    console.log('LOAD_JOBS');
     return {
         type: LOAD_JOBS,
         jobs: jobs

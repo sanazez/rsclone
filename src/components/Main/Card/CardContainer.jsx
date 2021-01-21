@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import JobCard from './Card';
+import noLogo from '../../../img/no-logo.png';
 
 function countDays(creatureDate) {
     let res = Date.now() - Date.parse(creatureDate);
@@ -13,13 +14,14 @@ function countDays(creatureDate) {
 
 let mapStateToProps = (state, props) => {
     if (state.headerElement.searchResults && state.headerElement.searchResults.length) {
+        let logo = state.headerElement.searchResults[props.cardIndex].employer.logo_urls ? state.headerElement.searchResults[props.cardIndex].employer.logo_urls.original : noLogo;
         return {
-            logo: state.headerElement.searchResults[props.cardIndex].company_logo_url,
-            company: state.headerElement.searchResults[props.cardIndex].company_name,
-            title: state.headerElement.searchResults[props.cardIndex].title,
-            type: state.headerElement.searchResults[props.cardIndex].job_type,
-            location: state.headerElement.searchResults[props.cardIndex].location,
-            created: countDays(state.headerElement.searchResults[props.cardIndex].publication_date),
+            logo,
+            company: state.headerElement.searchResults[props.cardIndex].employer.name,
+            title: state.headerElement.searchResults[props.cardIndex].name,
+            type: state.headerElement.searchResults[props.cardIndex].schedule.name,
+            location: state.headerElement.searchResults[props.cardIndex].area.name,
+            created: countDays(state.headerElement.searchResults[props.cardIndex].created_at),
             jobId: state.headerElement.searchResults[props.cardIndex].id
         }
     }
