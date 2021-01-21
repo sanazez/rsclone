@@ -3,6 +3,7 @@ const LOAD_JOBS = 'LOAD-JOBS';
 const CHANGE_PAGE = 'CHANGE_PAGE';
 const LOAD_PROFILE = 'LOAD_PROFILE';
 const CHANGE_CITY = 'CHANGE-CITY';
+const FULL_TIME = 'FULL-TIME';
 
 const initialState = {
     searchText: '',
@@ -11,7 +12,8 @@ const initialState = {
     jobPage: [],
     allJobs: [],
     currentCity: '',
-    searchCity: ''
+    searchCity: '',
+    isFullTime: false
 }
 
 const headerReducer = (state = initialState, action) => {
@@ -53,8 +55,8 @@ const headerReducer = (state = initialState, action) => {
         }
 
         case LOAD_PROFILE: {
-            let stateCopy = { ...state };
-            stateCopy.jobPage = action.info;;
+            let stateCopy = {...state};
+            stateCopy.jobPage = action.info;
             return stateCopy;
         }
 
@@ -77,8 +79,16 @@ const headerReducer = (state = initialState, action) => {
             }
             return stateCopy;
         }
-        
-        default: return state
+
+        case FULL_TIME: {
+            let stateCopy = {...state};
+            stateCopy.isFullTime = !state.isFullTime;
+            return stateCopy;
+        }
+
+        default:
+            return state;
+
     }
 }
 
@@ -86,6 +96,12 @@ export const changeCityAC = (city) => {
     return {
         type: CHANGE_CITY,
         city: city
+    }
+}
+
+export const selectFullTimeAC = () => {
+    return {
+        type: FULL_TIME
     }
 }
 

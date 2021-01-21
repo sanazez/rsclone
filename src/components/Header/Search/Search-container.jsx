@@ -14,10 +14,18 @@ class SearchContainer extends React.Component {
     }
 
     searchJobsOnClick = () => {
-        axios.get(`http://localhost:9000/testAPI/search?search=${this.props.searchText}`)
+        /*axios.get(`http://localhost:9000/testAPI/search?search=${this.props.searchText}`)
             .then(res => {
                 if (res.data.length) {
+                    console.log(res.data)
                     this.props.setJobs(res.data)
+                }
+            })*/
+        axios.get(`http://localhost:9000/hh`)
+            .then(res => {
+                console.log(res.data.items)
+                if (res.data.length) {
+                    this.props.setJobs(res.data.items)
                 }
             })
     }
