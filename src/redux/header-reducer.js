@@ -25,6 +25,7 @@ const headerReducer = (state = initialState, action) => {
         }
 
         case LOAD_JOBS: {
+            console.log(action.jobs);
             let stateCopy = {...state};
             stateCopy.allResults = [...action.jobs];
             stateCopy.allJobs = [...action.jobs];
