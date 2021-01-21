@@ -1,10 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
-import { Button } from '@material-ui/core';
+import {Button} from '@material-ui/core';
 import classes from './Search.module.css';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: '2px 4px',
@@ -35,6 +36,7 @@ const SearchHeader = (props) => {
     const onSearchChange = () => {
         const text = searchElement.current.value;
         props.searchChange(text);
+        props.getKeyWord(text);
     }
 
     const onSearchJobs = () => {
@@ -49,12 +51,12 @@ const SearchHeader = (props) => {
     }
     const styles = useStyles();
     return (
-        <Paper component="form" onKeyPress={offPreventDefaultForm} className={styles.root} >
-            <WorkOutlineIcon className={styles.iconWork} />
+        <Paper component="form" onKeyPress={offPreventDefaultForm} className={styles.root}>
+            <WorkOutlineIcon className={styles.iconWork}/>
             <InputBase
                 className={`${styles.input} ${classes.search}`}
                 placeholder="Title, companies, expertise or benefits"
-                inputProps={{ 'aria-label': 'search jobs' }}
+                inputProps={{'aria-label': 'search jobs'}}
                 value={props.searchText}
                 inputRef={searchElement}
                 onChange={onSearchChange}
@@ -63,7 +65,7 @@ const SearchHeader = (props) => {
             <Button variant="contained" color="primary" onClick={onSearchJobs}>
                 Search
             </Button>
-        </Paper >
+        </Paper>
     );
 }
 export default SearchHeader;
