@@ -11,6 +11,10 @@ class SearchContainer extends React.Component {
             .then(res => {
                 this.props.setJobs(res.data.items);
             })
+        // axios.get(`http://localhost:9000/hh`)
+        //     .then(res => {
+        //         this.props.setJobs(res.data.items);
+        //     })
     }
 
     searchJobsOnClick = () => {
