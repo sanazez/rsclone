@@ -10,6 +10,8 @@ const initialState = {
     searchResults: [],
     allResults: [],
     jobPage: [],
+    pageId: 1,
+    pagesNumber: 1,
     allJobs: [],
     currentCity: '',
     searchCity: '',
@@ -25,33 +27,17 @@ const headerReducer = (state = initialState, action) => {
         }
 
         case LOAD_JOBS: {
-            console.log(action.jobs);
             let stateCopy = {...state};
-            stateCopy.allResults = [...action.jobs];
-            stateCopy.allJobs = [...action.jobs];
-            stateCopy.searchResults = [];
-            let startNumber = 5;
-            if (stateCopy.allResults.length < 5) {
-                startNumber = stateCopy.allJobs.length
-            }
-            for (let i = 0; i < startNumber; i++) {
-                stateCopy.searchResults.push(stateCopy.allResults[i]);
-            }
+            stateCopy.searchResults = [...action.jobs];
+            stateCopy.pagesNumber = action.pagesNumber;
+            stateCopy.pageId = action.pageId;
             return stateCopy;
         }
 
         case CHANGE_PAGE: {
             let stateCopy = {...state};
-            stateCopy.allResults = [...state.allResults];
-            stateCopy.searchResults = [];
-            let startValue = (action.page - 1) * 5;
-            let cardsQuantity = 5
-            if ((stateCopy.allResults.length - startValue) < 5) {
-                cardsQuantity = stateCopy.allResults.length - startValue
-            }
-            for (let i = startValue; i < (startValue + cardsQuantity); i++) {
-                stateCopy.searchResults.push(stateCopy.allResults[i]);
-            }
+            stateCopy.pageId = action.page;
+            stateCopy.searchResults = [...state.searchResults]
             return stateCopy;
         }
 
@@ -113,11 +99,12 @@ export const updateSearchTextActionCreater = (text) => {
     }
 }
 
-export const loadAllActionCreater = (jobs) => {
-    console.log('LOAD_JOBS');
+export const loadAllActionCreater = (jobs, pages, pageId) => {
     return {
         type: LOAD_JOBS,
-        jobs: jobs
+        jobs: jobs,
+        pagesNumber: pages,
+        pageId
     }
 }
 

@@ -16,7 +16,8 @@ const useStyles = makeStyles({
   root: {
     display: 'flex',
     maxWidth: 1200,
-    margin: '0 auto'
+    margin: '0 auto',
+    minHeight: '100vh'
   },
   profileSidebar: {
     maxWidth: 230
@@ -61,7 +62,8 @@ const useStyles = makeStyles({
     display: 'flex'
   },
   profileDescription: {
-    padding: 20
+    padding: 20,
+    overflow: 'hidden'
   },
   jobType: {
     color: '#334680',
@@ -98,7 +100,6 @@ const useStyles = makeStyles({
 
 const JobProfile = (props) => {
   const classes = useStyles();
-  console.log(props);
   if (!props.profileInfo.id) {
     return <article></article>
   }
