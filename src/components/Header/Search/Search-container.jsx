@@ -7,10 +7,11 @@ import * as axios from 'axios';
 
 class SearchContainer extends React.Component {
     componentDidMount() {
-        axios.get(`http://localhost:9000/`)
-            .then(res => {
-                this.props.setJobs(res.data.items);
-            })
+        // axios.get(`http://localhost:9000/`)
+        //     .then(res => {
+        //         console.log(res.data);
+        //         this.props.setJobs(res.data.items);
+        //     })
         // axios.get(`http://localhost:9000/hh`)
         //     .then(res => {
         //         this.props.setJobs(res.data.items);
@@ -20,10 +21,9 @@ class SearchContainer extends React.Component {
     searchJobsOnClick = () => {
         axios.get(`http://localhost:9000/testAPI/search?search=${this.props.searchText}`)
             .then(res => {
-                console.log(this.props.searchText)
                 if (res.data.items && res.data.items.length) {
-                    console.log(res)
-                    this.props.setJobs(res.data.items)
+                    console.log(res.data);
+                    this.props.setJobs(res.data.items, res.data.pages);
                 }
             })
     }
@@ -55,8 +55,8 @@ const mapDispatchToProps = (dispatch) => {
             let action = updateSearchTextActionCreater(text);
             dispatch(action);
         },
-        setJobs: (jobs) => {
-            let action = loadAllActionCreater(jobs);
+        setJobs: (jobs, pages) => {
+            let action = loadAllActionCreater(jobs, pages);
             dispatch(action)
         }
     }

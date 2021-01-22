@@ -20,7 +20,6 @@ class JobProfileContainer extends React.Component {
     let searchJob = this.props.match.params.jobId;
     axios.get(`http://localhost:9000/id?idJob=${searchJob}`)
       .then(res => {
-        console.log(searchJob);
         this.props.onLoadProfileInfo(res.data);
       })
   }
