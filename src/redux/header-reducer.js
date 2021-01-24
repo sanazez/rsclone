@@ -4,6 +4,8 @@ const CHANGE_PAGE = 'CHANGE_PAGE';
 const LOAD_PROFILE = 'LOAD_PROFILE';
 const CHANGE_CITY = 'CHANGE-CITY';
 const FULL_TIME = 'FULL-TIME';
+const KEY_WORDS = 'KEY-WORDS';
+const CLEAR_KEY_WORDS = 'CLEAR-KEY-WORDS'
 
 const initialState = {
     searchText: '',
@@ -15,7 +17,8 @@ const initialState = {
     allJobs: [],
     currentCity: '',
     searchCity: '',
-    isFullTime: false
+    isFullTime: false,
+    keyWords: []
 }
 
 const headerReducer = (state = initialState, action) => {
@@ -67,6 +70,18 @@ const headerReducer = (state = initialState, action) => {
             return stateCopy;
         }
 
+        case KEY_WORDS: {
+            let stateCopy = {...state};
+            stateCopy.keyWords = action.keyWords;
+            return stateCopy;
+        }
+
+        case CLEAR_KEY_WORDS: {
+            let stateCopy = {...state};
+            stateCopy.keyWords = [];
+            return stateCopy;
+        }
+
         case FULL_TIME: {
             let stateCopy = {...state};
             stateCopy.isFullTime = !state.isFullTime;
@@ -76,6 +91,19 @@ const headerReducer = (state = initialState, action) => {
         default:
             return state;
 
+    }
+}
+export const clearKeyWordsAC = () => {
+    return {
+        type: CLEAR_KEY_WORDS
+    }
+}
+
+export const getKeyWordsAC = (keyWords, numberSymbols) => {
+    return {
+        type: KEY_WORDS,
+        keyWords,
+        numberSymbols
     }
 }
 

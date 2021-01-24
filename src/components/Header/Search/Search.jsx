@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         width: 790,
         minWidth: 315,
+        position: "relative"
     },
     input: {
         marginLeft: theme.spacing(1),
@@ -27,31 +28,58 @@ const useStyles = makeStyles((theme) => ({
     },
     iconWork: {
         color: '#B9BDCF'
+    },
+    keyWord: {
+        width: '100%',
+        backgroundColor: 'white',
+        zIndex: 100,
+        position: "absolute",
+        top: 40,
+        borderRadius: '5px',
+        right: 0,
     }
 }));
 
 let searchElement = React.createRef();
 
 const SearchHeader = (props) => {
-    const onSearchChange = () => {
+    const onSearchChange = async () => {
         const text = searchElement.current.value;
+        await props.getKeyWord(text);
         props.searchChange(text);
-        props.getKeyWord(text);
+
     }
 
-    const onSearchJobs = () => {
-        props.searchJobs();
+    const onSearchJobs = (text) => {
+        props.searchJobs(text);
+        props.clearKeyWords();
     }
 
     const offPreventDefaultForm = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            onSearchJobs();
+            onSearchJobs(props.searchText);
         }
+    }
+
+    const searchJobsOnclickButton = () => {
+        onSearchJobs(props.searchText);
     }
     const styles = useStyles();
     return (
         <Paper component="form" onKeyPress={offPreventDefaultForm} className={styles.root}>
+            <div className={styles.keyWord}>
+                <ul className={classes.list}>
+                    {props.keyWords.map((word, index) => {
+                        const getJobsByKeyWords = () => {
+                            props.searchChange(word.text);
+                            onSearchJobs(word.text);
+                        }
+                        return <li className={classes.item} onClick={getJobsByKeyWords}
+                                   key={index}>{word.text}</li>
+                    })}
+                </ul>
+            </div>
             <WorkOutlineIcon className={styles.iconWork}/>
             <InputBase
                 className={`${styles.input} ${classes.search}`}
@@ -60,9 +88,8 @@ const SearchHeader = (props) => {
                 value={props.searchText}
                 inputRef={searchElement}
                 onChange={onSearchChange}
-
             />
-            <Button variant="contained" color="primary" onClick={onSearchJobs}>
+            <Button variant="contained" color="primary" onClick={searchJobsOnclickButton}>
                 Search
             </Button>
         </Paper>
