@@ -21,19 +21,22 @@ const useStyles = makeStyles((theme) => ({
 
 const Content = (props) => {
   const classes = useStyles();
+  const [pageVal, setPageVal] = React.useState(null);
   const handleChange = (event, value) => {
     props.onChangePage(value);
     props.changePageInfo(value);
+    setPageVal(value);
   };
+  console.log(props);
   return (
     <div className={classes.root}>
       {props.arr.map((val, index) => <JobCardContainer cardIndex={index} key={index} />)}
-      <Pagination count={props.pages} onChange={handleChange} variant="outlined" shape="rounded"
+      <Pagination count={props.pages} defaultPage={pageVal} onChange={handleChange} variant="outlined" shape="rounded"
         renderItem={(item) => (
           <PaginationItem
             type={"start-ellipsis"}
             component={Link}
-            selected
+            
             to={`/page/${item.page}`}
             {...item}
           />
@@ -41,5 +44,5 @@ const Content = (props) => {
     </div>
   );
 }
-
+// 
 export default Content;

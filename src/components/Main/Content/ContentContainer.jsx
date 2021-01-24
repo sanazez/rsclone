@@ -21,13 +21,12 @@ class ContentContainer extends React.Component {
     axios.get(`http://localhost:9000/page?page=${value}`)
       .then(res => {
         if (res.data.items && res.data.items.length) {
-          console.log(res.data);
           this.props.setJobs(res.data.items, res.data.pages);
         }
       })
   }
   render() {
-    return <Content pages={this.props.pages} arr={this.props.arr} currentPage={this.props.currentPage} onChangePage={this.props.onChangePage} changePageInfo={this.changePageInfo} />
+    return <Content pages={this.props.pages} arr={this.props.arr} currentPage={this.props.currentPage} onChangePage={this.props.onChangePage} changePageInfo={this.changePageInfo.bind(this)} />
   }
 }
 
