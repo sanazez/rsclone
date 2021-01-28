@@ -14,7 +14,7 @@ const App = (props) => {
         <Route exact path="/">
           <Redirect to='/page/1' />
         </Route>
-        <Route exact path='/page/:pageId' render={() => <MainPage />} />
+        <Route exact path='/page/:pageId' component={MainPage} />
         <Route exact path='/job/:jobId' render={() => <JobProfileContainer />} />
       </Switch>
     </div>

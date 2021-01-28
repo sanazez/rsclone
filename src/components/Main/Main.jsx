@@ -7,7 +7,7 @@ import SidebarContainer from './Sidebar/Sidebar-container';
 const Main = (props) => {
     return <main className={classes.main}>
         <SidebarContainer />
-        <ContentContainer />
+        <ContentContainer props={props} />
         {/* <Route exact path='/page/:pageId' render={() => <ContentContainer />} /> */}
     </main>
 }

@@ -12,7 +12,7 @@ const initialState = {
     searchResults: [],
     allResults: [],
     jobPage: [],
-    pageId: 1,
+    pageId: null,
     pagesNumber: 1,
     allJobs: [],
     currentCity: '',
@@ -33,14 +33,13 @@ const headerReducer = (state = initialState, action) => {
             let stateCopy = {...state};
             stateCopy.searchResults = [...action.jobs];
             stateCopy.pagesNumber = action.pagesNumber;
-            stateCopy.pageId = action.pageId;
             return stateCopy;
         }
 
         case CHANGE_PAGE: {
             let stateCopy = {...state};
-            stateCopy.pageId = action.page;
-            stateCopy.searchResults = [...state.searchResults]
+            stateCopy.pageId = Number(action.page);
+            // stateCopy.searchResults = [...state.searchResults]
             return stateCopy;
         }
 
@@ -127,12 +126,11 @@ export const updateSearchTextActionCreater = (text) => {
     }
 }
 
-export const loadAllActionCreater = (jobs, pages, pageId) => {
+export const loadAllActionCreater = (jobs, pages) => {
     return {
         type: LOAD_JOBS,
         jobs: jobs,
         pagesNumber: pages,
-        pageId
     }
 }
 
