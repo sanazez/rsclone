@@ -4,18 +4,21 @@ const CHANGE_PAGE = 'CHANGE_PAGE';
 const LOAD_PROFILE = 'LOAD_PROFILE';
 const CHANGE_CITY = 'CHANGE-CITY';
 const FULL_TIME = 'FULL-TIME';
+const KEY_WORDS = 'KEY-WORDS';
+const CLEAR_KEY_WORDS = 'CLEAR-KEY-WORDS'
 
 const initialState = {
     searchText: '',
     searchResults: [],
     allResults: [],
     jobPage: [],
-    pageId: 1,
+    pageId: null,
     pagesNumber: 1,
     allJobs: [],
     currentCity: '',
     searchCity: '',
-    isFullTime: false
+    isFullTime: false,
+    keyWords: []
 }
 
 const headerReducer = (state = initialState, action) => {
@@ -30,14 +33,13 @@ const headerReducer = (state = initialState, action) => {
             let stateCopy = {...state};
             stateCopy.searchResults = [...action.jobs];
             stateCopy.pagesNumber = action.pagesNumber;
-            stateCopy.pageId = action.pageId;
             return stateCopy;
         }
 
         case CHANGE_PAGE: {
             let stateCopy = {...state};
-            stateCopy.pageId = action.page;
-            stateCopy.searchResults = [...state.searchResults]
+            stateCopy.pageId = Number(action.page);
+            // stateCopy.searchResults = [...state.searchResults]
             return stateCopy;
         }
 
@@ -67,6 +69,18 @@ const headerReducer = (state = initialState, action) => {
             return stateCopy;
         }
 
+        case KEY_WORDS: {
+            let stateCopy = {...state};
+            stateCopy.keyWords = action.keyWords;
+            return stateCopy;
+        }
+
+        case CLEAR_KEY_WORDS: {
+            let stateCopy = {...state};
+            stateCopy.keyWords = [];
+            return stateCopy;
+        }
+
         case FULL_TIME: {
             let stateCopy = {...state};
             stateCopy.isFullTime = !state.isFullTime;
@@ -76,6 +90,19 @@ const headerReducer = (state = initialState, action) => {
         default:
             return state;
 
+    }
+}
+export const clearKeyWordsAC = () => {
+    return {
+        type: CLEAR_KEY_WORDS
+    }
+}
+
+export const getKeyWordsAC = (keyWords, numberSymbols) => {
+    return {
+        type: KEY_WORDS,
+        keyWords,
+        numberSymbols
     }
 }
 
@@ -99,12 +126,11 @@ export const updateSearchTextActionCreater = (text) => {
     }
 }
 
-export const loadAllActionCreater = (jobs, pages, pageId) => {
+export const loadAllActionCreater = (jobs, pages) => {
     return {
         type: LOAD_JOBS,
         jobs: jobs,
         pagesNumber: pages,
-        pageId
     }
 }
 
