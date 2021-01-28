@@ -15,11 +15,10 @@ const initialState = {
     pageId: 1,
     pagesNumber: 1,
     allJobs: [],
-    currentCity: '',
-    searchCity: '',
     isFullTime: false,
     keyWords: []
 }
+
 
 const headerReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -87,7 +86,6 @@ const headerReducer = (state = initialState, action) => {
             stateCopy.isFullTime = !state.isFullTime;
             return stateCopy;
         }
-
         default:
             return state;
 

@@ -24,21 +24,23 @@ class SearchContainer extends React.Component {
     }
 
     searchJobsOnClick = (text) => {
-        axios.get(`http://localhost:9000/testAPI/search?search=${text}`)
+        console.log(text)
+        axios.get(`http://localhost:9000/testAPI/search?search=${text}&area=${this.props.cityId}`)
             .then(res => {
+                console.log(res.data)
                 if (res.data.items && res.data.items.length) {
                     this.props.setJobs(res.data.items, res.data.pages);
                 }
             })
     }
 
+
     getKeywordFromSearch = (text) => {
-        console.log(text.length)
         axios.get(`http://localhost:9000/keyword?word=${text}`)
             .then(res => {
                 if (this.props.searchText.length >= 2) {
                     if (res.data.items) this.props.getKeyWords(res.data.items);
-                } else this.props.getKeyWords([])
+                } else this.props.getKeyWords([]);
             })
     }
 
@@ -53,7 +55,8 @@ class SearchContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         searchText: state.headerElement.searchText,
-        keyWords: state.headerElement.keyWords
+        keyWords: state.headerElement.keyWords,
+        cityId: state.sidebarState.currentCityId
     }
 }
 

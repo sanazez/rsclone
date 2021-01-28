@@ -43,9 +43,9 @@ const useStyles = makeStyles((theme) => ({
 let searchElement = React.createRef();
 
 const SearchHeader = (props) => {
-    const onSearchChange = async () => {
+    const onSearchChange = () => {
         const text = searchElement.current.value;
-        await props.getKeyWord(text);
+        props.getKeyWord(text);
         props.searchChange(text);
 
     }
@@ -95,4 +95,4 @@ const SearchHeader = (props) => {
         </Paper>
     );
 }
-export default SearchHeader;
+export default SearchHeader

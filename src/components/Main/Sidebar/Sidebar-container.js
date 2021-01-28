@@ -1,23 +1,71 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Sidebar from './Sidebar';
-import {changeCityAC,} from "../../../redux/header-reducer";
+import {changeCityAC, loadAllActionCreater} from "../../../redux/header-reducer";
+import * as axios from "axios";
+import {getKeyWordsCitiesAC, setCurrentCityAC, updateSearchTextCities} from "../../../redux/sidebar-reducer";
 
+
+class SidebarContainer extends React.Component {
+    getKeyWordsCities = (text) => {
+        axios.get(`http://localhost:9000/city-keyword?city=${text}`)
+            .then(res => {
+                if (this.props.text.length >= 2) {
+                    if (res.data.items) {
+                        console.log(res.data.items)
+                        this.props.getKeyWords(res.data.items)
+                    }
+                } else {
+                    this.props.getKeyWords([]);
+                }
+            })
+    }
+
+    getJobsFromCity = (city, cityId) => {
+        this.props.setCity(city, cityId)
+        axios.get(`http://localhost:9000/testAPI/search?search=${this.props.searchText}&area=${cityId}`)
+            .then(res => {
+                if (res.data.items && res.data.items.length) {
+                    this.props.setJobs(res.data.items, res.data.pages);
+                }
+            })
+    }
+
+    render() {
+        return <Sidebar textKeyWords={this.props.text} getKeyWords={this.getKeyWordsCities}
+                        updateTextKeyWords={this.props.updateTextKeyWords} cities={this.props.cities}
+                        getJobs={this.getJobsFromCity}/>
+    }
+}
 
 const mapStateToProps = (state) => {
     return {
-        city: state.headerElement.currentCity,
-        text: state.headerElement.searchCity
+        text: state.sidebarState.searchCityText,
+        cities: state.sidebarState.keyWords,
+        cityId: state.sidebarState.cityId,
+        searchText: state.headerElement.searchText
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCity: (city) => {
-            let action = changeCityAC(city);
+        getKeyWords: (keyWords) => {
+            let action = getKeyWordsCitiesAC(keyWords);
             dispatch(action);
         },
+        updateTextKeyWords: (text) => {
+            let action = updateSearchTextCities(text);
+            dispatch(action)
+        },
+        setCity: (city, cityId) => {
+            let action = setCurrentCityAC(city, cityId);
+            dispatch(action);
+        },
+        setJobs: (jobs, pages) => {
+            let action = loadAllActionCreater(jobs, pages);
+            dispatch(action);
+        }
     }
 }
 
-const SidebarContainer = connect(mapStateToProps, mapDispatchToProps)(Sidebar);
-export default SidebarContainer;
+
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarContainer);

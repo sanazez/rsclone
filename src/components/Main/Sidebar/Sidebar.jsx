@@ -8,6 +8,7 @@ import PublicIcon from '@material-ui/icons/Public';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
+
 const Sidebar = (props) => {
     // const handleChange = (event) => {
     //   setState({ ...state, [event.target.name]: event.target.checked });
@@ -18,10 +19,13 @@ const Sidebar = (props) => {
     let searchElement = React.createRef();
     const getCityOnChangeTextField = (e) => {
         const text = searchElement.current.value;
+        props.updateTextKeyWords(text);
+        props.getKeyWords(text);
         if (e.nativeEvent.key === 'Enter') {
-            props.setCity(text);
+
         }
     }
+
     return <aside className={classes.sidebar}>
         <FormControlLabel
             className={classes.checkBox}
@@ -33,18 +37,32 @@ const Sidebar = (props) => {
             <Grid item>
                 <PublicIcon className={classes.search}/>
             </Grid>
-            <Grid item>
-                <TextField inputRef={searchElement} id="input-with-icon-grid"
-                           label="City, state or country"
-                           onKeyDown={getCityOnChangeTextField}/>
+            <Grid item className={classes.wrapperCities}>
+                <div className={classes.keywords}>
+                    <ul className={classes.list}>
+                        {props.cities.map((city, index) => {
+                            const getJobsFromCity = () => {
+                                props.getJobs(city.text, city.id);
+                            }
+                            return <li className={classes.item} key={index} onClick={getJobsFromCity}>
+                                {city.text}
+                            </li>
+                        })}
+                    </ul>
+                </div>
+                <TextField autoComplete={'off'} inputRef={searchElement} id="input-with-icon-grid"
+                           label="Введите название города"
+                           onChange={getCityOnChangeTextField}
+                           value={props.textKeyWords}
+                />
             </Grid>
         </Grid>
         <RadioGroup className={classes.radioBtn} aria-label="city" name="city" value={props.city}
-                    onChange={getCityOnchangeRadios}>
-            <FormControlLabel value="London" control={<Radio color="primary"/>} label="London"/>
-            <FormControlLabel value="Amsterdam" control={<Radio color="primary"/>} label="Amsterdam"/>
-            <FormControlLabel value="Minsk" control={<Radio color="primary"/>} label="Minsk"/>
-            <FormControlLabel value="Berlin" control={<Radio color="primary"/>} label="Berlin"/>
+        >
+            <FormControlLabel value="Минск" control={<Radio color="primary"/>} label="Минск"/>
+            <FormControlLabel value="Киев" control={<Radio color="primary"/>} label="Киев"/>
+            <FormControlLabel value="Москва" control={<Radio color="primary"/>} label="Москва"/>
+            <FormControlLabel value="Брест" control={<Radio color="primary"/>} label="Брест"/>
         </RadioGroup>
     </aside>
 }

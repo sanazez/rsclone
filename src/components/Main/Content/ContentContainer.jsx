@@ -5,6 +5,8 @@ import {changePageCreater} from '../../../redux/header-reducer';
 import * as axios from 'axios';
 import {withRouter} from 'react-router-dom';
 import {loadAllActionCreater} from '../../../redux/header-reducer';
+import {createBrowserHistory} from 'history';
+
 
 class ContentContainer extends React.Component {
     componentDidMount() {
@@ -22,15 +24,15 @@ class ContentContainer extends React.Component {
         axios.get(`http://localhost:9000/page?page=${value}`)
             .then(res => {
                 if (res.data.items && res.data.items.length) {
-                    console.log(res.data);
                     this.props.setJobs(res.data.items, res.data.pages);
+                    this.props.onChangePage(Number(this.props.match.params.pageId))
                 }
             })
     }
 
     render() {
         return <Content pages={this.props.pages} arr={this.props.arr} currentPage={this.props.currentPage}
-                        onChangePage={this.props.onChangePage} changePageInfo={this.changePageInfo}/>
+                        page={this.props.match.params.pageId} changePageInfo={this.changePageInfo}/>
     }
 }
 
