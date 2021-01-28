@@ -5,42 +5,45 @@ import {changePageCreater} from '../../../redux/header-reducer';
 import * as axios from 'axios';
 import {withRouter} from 'react-router-dom';
 import {loadAllActionCreater} from '../../../redux/header-reducer';
-import {createBrowserHistory} from 'history';
-
 
 class ContentContainer extends React.Component {
-    componentDidMount() {
-        this.props.setJobs([]);
-        let searchPage = this.props.match.params.pageId ? this.props.match.params.pageId : (this.props.currentPage || 1);
-        axios.get(`http://localhost:9000/page?page=${searchPage - 1}`)
-            .then(res => {
-                if (res.data.items && res.data.items.length) {
-                    this.props.setJobs(res.data.items, res.data.pages, searchPage)
-                }
-            })
-    }
+  componentDidMount() {
+    this.props.setJobs([]);
+    this.props.history.listen((location, action) => {
+      let routedPage = location.pathname.split('/');
+      this.changePageInfo(routedPage[2]);
+    });
+    let searchPage = this.props.match.params.pageId ? this.props.match.params.pageId : (this.props.currentPage || 1);
+    this.props.onChangePage(this.props.match.params.pageId);
+    axios.get(`http://localhost:9000/page?page=${searchPage - 1}`)
+      .then(res => {
+        if (res.data.items && res.data.items.length) {
+          this.props.setJobs(res.data.items, res.data.pages)
+        }
+      })
+  }
+  changePageInfo(value) {
+    this.props.onChangePage(value);
+    axios.get(`http://localhost:9000/page?page=${value - 1}`)
+      .then(res => {
+        if (res.data.items && res.data.items.length) {
+          this.props.setJobs(res.data.items, res.data.pages);
+        }
+      })
+  }
 
-    changePageInfo = (value) => {
-        axios.get(`http://localhost:9000/page?page=${value}`)
-            .then(res => {
-                if (res.data.items && res.data.items.length) {
-                    this.props.setJobs(res.data.items, res.data.pages);
-                    this.props.onChangePage(Number(this.props.match.params.pageId))
-                }
-            })
-    }
+  render() {
+    return <Content pages={this.props.pages} arr={this.props.arr} currentPage={this.props.currentPage} onChangePage={this.props.onChangePage} changePageInfo={this.changePageInfo.bind(this)} />
 
-    render() {
-        return <Content pages={this.props.pages} arr={this.props.arr} currentPage={this.props.currentPage}
-                        page={this.props.match.params.pageId} changePageInfo={this.changePageInfo}/>
-    }
+  }
 }
 
 const mapStateToProps = (state) => {
     if (!state.headerElement.searchResults || !state.headerElement.searchResults.length) {
         return {
             arr: [1, 2, 3, 4, 5],
-            pages: 1
+            pages: 1,
+            currentPage: state.headerElement.pageId
         }
     }
     return {
