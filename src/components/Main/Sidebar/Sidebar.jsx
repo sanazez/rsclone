@@ -5,17 +5,15 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import PublicIcon from '@material-ui/icons/Public';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
+import SelectTime from "./Selects/Select-time/Select-time-container";
+import SelectExperience from "./Selects/Select-experience/Select-experience-container";
 
 
 const Sidebar = (props) => {
     // const handleChange = (event) => {
     //   setState({ ...state, [event.target.name]: event.target.checked });
     // };
-    const getCityOnchangeRadios = (e) => {
-        props.setCity(e.target.value);
-    }
+
     let searchElement = React.createRef();
     const getCityOnChangeTextField = (e) => {
         const text = searchElement.current.value;
@@ -25,13 +23,7 @@ const Sidebar = (props) => {
 
         }
     }
-
     return <aside className={classes.sidebar}>
-        <FormControlLabel
-            className={classes.checkBox}
-            control={<Checkbox name="fullTime" color="primary"/>}
-            label="Full Time"
-        />
         <h3>LOCATION</h3>
         <Grid className={classes.searchContiner} container spacing={1} alignItems="flex-end">
             <Grid item>
@@ -57,13 +49,62 @@ const Sidebar = (props) => {
                 />
             </Grid>
         </Grid>
-        <RadioGroup className={classes.radioBtn} aria-label="city" name="city" value={props.city}
-        >
-            <FormControlLabel value="Минск" control={<Radio color="primary"/>} label="Минск"/>
-            <FormControlLabel value="Киев" control={<Radio color="primary"/>} label="Киев"/>
-            <FormControlLabel value="Москва" control={<Radio color="primary"/>} label="Москва"/>
-            <FormControlLabel value="Брест" control={<Radio color="primary"/>} label="Брест"/>
-        </RadioGroup>
+        <div className={classes.filter}>
+            <div className={classes.typeJobs}>
+                <h4>Тип занятости</h4>
+                <FormControlLabel
+                    className={classes.checkBox}
+                    control={<Checkbox name="fullTime" color="primary"/>}
+                    label="Полная занятость"
+                />
+                <FormControlLabel
+                    className={classes.checkBox}
+                    control={<Checkbox name="fullTime" color="primary"/>}
+                    label="Частичная занятость"
+                />
+                <FormControlLabel
+                    className={classes.checkBox}
+                    control={<Checkbox name="fullTime" color="primary"/>}
+                    label="Стажировка"
+                />
+                <FormControlLabel
+                    className={classes.checkBox}
+                    control={<Checkbox name="fullTime" color="primary"/>}
+                    label="Волонтерство"
+                />
+            </div>
+            <div className={classes.schedule}>
+                <h4>График работы</h4>
+                <FormControlLabel
+                    className={classes.checkBox}
+                    control={<Checkbox name="fullTime" color="primary"/>}
+                    label="Полный день"
+                />
+                <FormControlLabel
+                    className={classes.checkBox}
+                    control={<Checkbox name="fullTime" color="primary"/>}
+                    label="Сменный график"
+                />
+                <FormControlLabel
+                    className={classes.checkBox}
+                    control={<Checkbox name="fullTime" color="primary"/>}
+                    label="Гибкий график"
+                />
+                <FormControlLabel
+                    className={classes.checkBox}
+                    control={<Checkbox name="fullTime" color="primary"/>}
+                    label="Удаленная работа"
+                />
+            </div>
+            <div className={classes.experience}>
+                <h4>Требуемый опыт работы</h4>
+                <SelectExperience/>
+            </div>
+            <div className={classes.showJobs}>
+                <h4>Показывать вакансии</h4>
+                <SelectTime/>
+            </div>
+        </div>
     </aside>
 }
 

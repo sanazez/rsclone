@@ -16,10 +16,6 @@
     color: #B9BDCF;
 }
 
-.checkBox {
-    margin-bottom: 25px;
-}
-
 .searchContiner {
     margin-bottom: 25px;
 }
@@ -57,4 +53,28 @@
 .item:hover {
     cursor: pointer;
     background-color: #E1E1E1;
+}
+
+.checkBox span {
+    padding: 2px;
+}
+
+.typeJobs, .schedule, .experience, .showJobs {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.typeJobs label, .schedule label, .experience label {
+    margin: 0;
+    margin-left: 10px;
+}
+
+.filter h4 {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.showJobs {
+
 }

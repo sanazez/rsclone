@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Sidebar from './Sidebar';
-import {changeCityAC, loadAllActionCreater} from "../../../redux/header-reducer";
+import {loadAllActionCreater} from "../../../redux/header-reducer";
 import * as axios from "axios";
 import {getKeyWordsCitiesAC, setCurrentCityAC, updateSearchTextCities} from "../../../redux/sidebar-reducer";
 
@@ -23,7 +23,7 @@ class SidebarContainer extends React.Component {
 
     getJobsFromCity = (city, cityId) => {
         this.props.setCity(city, cityId)
-        axios.get(`http://localhost:9000/testAPI/search?search=${this.props.searchText}&area=${cityId}`)
+        axios.get(`http://localhost:9000/testAPI/search?search=${this.props.searchText}&area=${cityId}&period=${this.props.period}&experience${this.props.experience}`)
             .then(res => {
                 if (res.data.items && res.data.items.length) {
                     this.props.setJobs(res.data.items, res.data.pages);
@@ -43,7 +43,9 @@ const mapStateToProps = (state) => {
         text: state.sidebarState.searchCityText,
         cities: state.sidebarState.keyWords,
         cityId: state.sidebarState.cityId,
-        searchText: state.headerElement.searchText
+        searchText: state.headerElement.searchText,
+        period: state.sidebarState.period,
+        experience: state.sidebarState.experience,
     }
 }
 const mapDispatchToProps = (dispatch) => {

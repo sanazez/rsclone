@@ -75,7 +75,7 @@ const SearchHeader = (props) => {
                             props.searchChange(word.text);
                             onSearchJobs(word.text);
                         }
-                        return <li className={classes.item} onClick={getJobsByKeyWords}
+                        return <li className={classes.item} onMouseUp={getJobsByKeyWords}
                                    key={index}>{word.text}</li>
                     })}
                 </ul>
@@ -89,7 +89,7 @@ const SearchHeader = (props) => {
                 inputRef={searchElement}
                 onChange={onSearchChange}
             />
-            <Button variant="contained" color="primary" onClick={searchJobsOnclickButton}>
+            <Button variant="contained" color="primary" onMouseUp={searchJobsOnclickButton}>
                 Search
             </Button>
         </Paper>

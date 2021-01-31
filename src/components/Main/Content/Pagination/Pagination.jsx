@@ -14,17 +14,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PaginationControlled(props) {
-    const changePageId = (e) => {
-        props.changePageInfo(Number(e.target.innerText));
-        console.log(e.target.innerText)
-
+    let {pageId} = useParams()
+    const history = useHistory();
+    console.log(pageId)
+    // console.log('pages', props.pages)
+    const changePageId = () => {
+        props.changePage();
     }
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Pagination count={props.pages ? props.pages : 10} page={props.currentPage}
+            <Pagination count={props.pages ? props.pages : 10} page={Number(pageId)}
                         variant="outlined" shape="rounded"
-                        onChange={changePageId}
                         renderItem={(item) => {
                             return <PaginationItem
                                 type={"start-ellipsis"}
@@ -34,6 +35,5 @@ export default function PaginationControlled(props) {
                             />
                         }}/>
         </div>
-    )
-        ;
+    );
 }

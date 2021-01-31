@@ -24,8 +24,8 @@ class SearchContainer extends React.Component {
     }
 
     searchJobsOnClick = (text) => {
-        console.log(text)
-        axios.get(`http://localhost:9000/testAPI/search?search=${text}&area=${this.props.cityId}`)
+        console.log(text, this.props.period)
+        axios.get(`http://localhost:9000/testAPI/search?search=${text}&area=${this.props.cityId}&period=${this.props.period}&experience=${this.props.experience}`)
             .then(res => {
                 console.log(res.data)
                 if (res.data.items && res.data.items.length) {
@@ -33,7 +33,6 @@ class SearchContainer extends React.Component {
                 }
             })
     }
-
 
     getKeywordFromSearch = (text) => {
         axios.get(`http://localhost:9000/keyword?word=${text}`)
@@ -56,7 +55,9 @@ const mapStateToProps = (state) => {
     return {
         searchText: state.headerElement.searchText,
         keyWords: state.headerElement.keyWords,
-        cityId: state.sidebarState.currentCityId
+        cityId: state.sidebarState.currentCityId,
+        period: state.sidebarState.period,
+        experience: state.sidebarState.experience,
     }
 }
 

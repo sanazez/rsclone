@@ -1,11 +1,15 @@
 const KEY_WORDS_CITIES = 'KEY-WORDS-CITIES';
 const UPDATE_SEARCH_TEXT_CITIES = 'UPDATE-SEARCH-TEXT-CITIES';
 const SET_CURRENT_CITY = 'SET-CURRENT-CITY';
+const CHANGE_VALUE_SELECT_TIME = 'CHANGE-VALUE-SELECT-TIME';
+const CHANGE_VALUE_SELECT_EXPERIENCE = 'CHANGE-VALUE-SELECT-EXPERIENCE';
 
 const initialState = {
     keyWords: [],
     searchCityText: '',
-    currentCityId: ''
+    currentCityId: '',
+    period: 0,
+    experience: 0,
 }
 
 const sidebarReducer = (state = initialState, action) => {
@@ -16,11 +20,13 @@ const sidebarReducer = (state = initialState, action) => {
             return copyState;
 
         }
-
         case UPDATE_SEARCH_TEXT_CITIES: {
             let copyState = {...state};
             copyState.searchCityText = action.text;
             copyState.keyWords = state.keyWords;
+            if (!action.text) {
+                copyState.currentCityId = '';
+            }
             return copyState;
         }
         case SET_CURRENT_CITY: {
@@ -30,8 +36,34 @@ const sidebarReducer = (state = initialState, action) => {
             copyState.keyWords = [];
             return copyState;
         }
+        case CHANGE_VALUE_SELECT_TIME: {
+            let copyState = {...state};
+            copyState.period = action.value;
+
+            console.log(action.value);
+            return copyState;
+        }
+        case CHANGE_VALUE_SELECT_EXPERIENCE: {
+            let copyState = {...state};
+            copyState.experience = action.value;
+            return copyState;
+        }
         default:
             return state;
+    }
+}
+
+export const changeValueSelectExperienceAC = (value) => {
+    return {
+        type: CHANGE_VALUE_SELECT_EXPERIENCE,
+        value
+    }
+}
+
+export const changeValueSelectTimeAC = (value) => {
+    return {
+        type: CHANGE_VALUE_SELECT_TIME,
+        value
     }
 }
 

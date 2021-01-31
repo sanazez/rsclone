@@ -21,6 +21,7 @@ const initialState = {
 
 
 const headerReducer = (state = initialState, action) => {
+    console.log(action)
     switch (action.type) {
         case UPDATE_SEARCH_TEXT: {
             let stateCopy = {...state};
@@ -32,12 +33,14 @@ const headerReducer = (state = initialState, action) => {
             let stateCopy = {...state};
             stateCopy.searchResults = [...action.jobs];
             stateCopy.pagesNumber = action.pagesNumber;
+            // console.log('pagesNumber', action.pagesNumber)
             return stateCopy;
         }
 
         case CHANGE_PAGE: {
             let stateCopy = {...state};
             stateCopy.pageId = Number(action.page);
+            console.log('pageId', action.page)
             // stateCopy.searchResults = [...state.searchResults]
             return stateCopy;
         }
