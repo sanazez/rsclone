@@ -9,9 +9,11 @@ import {loadAllActionCreater} from '../../../redux/header-reducer';
 class ContentContainer extends React.Component {
   componentDidMount() {
     this.props.setJobs([]);
-    this.props.history.listen((location, action) => {
+    this.unsubscribeFromHistory = this.props.history.listen((location, action) => {
       let routedPage = location.pathname.split('/');
-      this.changePageInfo(routedPage[2]);
+      if (routedPage[1] === 'page') {
+        this.changePageInfo(routedPage[2]);
+      }
     });
     let searchPage = this.props.match.params.pageId ? this.props.match.params.pageId : (this.props.currentPage || 1);
     this.props.onChangePage(this.props.match.params.pageId);
@@ -22,7 +24,11 @@ class ContentContainer extends React.Component {
         }
       })
   }
+  componentWillUnmount() {
+    if (this.unsubscribeFromHistory) this.unsubscribeFromHistory();
+  }
   changePageInfo(value) {
+    console.log(value);
     this.props.onChangePage(value);
     axios.get(`http://localhost:9000/page?page=${value - 1}`)
       .then(res => {

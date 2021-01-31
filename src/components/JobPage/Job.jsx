@@ -103,6 +103,7 @@ const JobProfile = (props) => {
   if (!props.profileInfo.id) {
     return <article></article>
   }
+  // console.log(props.similarJobs);
   let logo = props.profileInfo.employer.logo_urls;
   const phones = () => {
     if (props.profileInfo.contacts && props.profileInfo.contacts.phones && props.profileInfo.contacts.phones.length) {
