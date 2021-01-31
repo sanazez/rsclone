@@ -8,7 +8,6 @@ const Main = (props) => {
     return <main className={classes.main}>
         <SidebarContainer />
         <ContentContainer props={props} />
-        {/* <Route exact path='/page/:pageId' render={() => <ContentContainer />} /> */}
     </main>
 }
 

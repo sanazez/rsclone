@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PaginationControlled(props) {
     const classes = useStyles();
-    console.log(props.currentPage);
     return (
         <div className={classes.root}>
             <Pagination count={props.pages ? props.pages : 10} page={props.currentPage ? props.currentPage : 1} variant="outlined" shape="rounded"
