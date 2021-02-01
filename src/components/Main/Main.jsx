@@ -1,21 +1,13 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import classes from './Main.module.css';
-import PaginationContainer from './Content/PaginationContainer';
+import ContentContainer from './Content/ContentContainer';
 import SidebarContainer from './Sidebar/Sidebar-container';
-import ContentConteiner from "./Content/ContentConteiner";
-import {Route, Switch} from "react-router-dom";
 
 const Main = (props) => {
     return <main className={classes.main}>
-        <SidebarContainer/>
-        <div>
-            <Switch>
-                <Route path='/page/:pageId' component={ContentConteiner}/>
-            </Switch>
-            <PaginationContainer/>
-        </div>
-
-        {/* <Route exact path='/page/:pageId' render={() => <ContentContainer />} /> */}
+        <SidebarContainer />
+        <ContentContainer props={props} />
     </main>
 }
 

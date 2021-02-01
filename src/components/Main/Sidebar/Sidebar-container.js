@@ -4,11 +4,12 @@ import Sidebar from './Sidebar';
 import {loadAllActionCreater} from "../../../redux/header-reducer";
 import * as axios from "axios";
 import {getKeyWordsCitiesAC, setCurrentCityAC, updateSearchTextCities} from "../../../redux/sidebar-reducer";
+import {apiGetKeyWordsCities, apiSearch} from "../../../api/api";
 
 
 class SidebarContainer extends React.Component {
     getKeyWordsCities = (text) => {
-        axios.get(`http://localhost:9000/city-keyword?city=${text}`)
+        apiGetKeyWordsCities(text)
             .then(res => {
                 if (this.props.text.length >= 2) {
                     if (res.data.items) {
@@ -23,7 +24,7 @@ class SidebarContainer extends React.Component {
 
     getJobsFromCity = (city, cityId) => {
         this.props.setCity(city, cityId)
-        axios.get(`http://localhost:9000/testAPI/search?search=${this.props.searchText}&area=${cityId}&period=${this.props.period}&experience${this.props.experience}`)
+        apiSearch(this.props.searchText, cityId, this.props.period, this.props.experience)
             .then(res => {
                 if (res.data.items && res.data.items.length) {
                     this.props.setJobs(res.data.items, res.data.pages);

@@ -5,7 +5,7 @@ import {changePageCreater, loadAllActionCreater} from "../../../redux/header-red
 import * as axios from 'axios';
 
 
-class ContentConteiner extends React.Component {
+class ContentConteinerDiff extends React.Component {
     componentDidMount() {
         axios.get(`http://localhost:9000/page?page=${this.props.currentPage - 1}&search=${this.props.searchText}&area=${this.props.currentCityId}&period=${this.props.period}&experience=${this.props.experience}`)
             .then(res => {
@@ -59,4 +59,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContentConteiner)
+export default connect(mapStateToProps, mapDispatchToProps)(ContentConteinerDiff)

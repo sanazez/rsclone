@@ -4,6 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 // import Pagination from '@material-ui/lab/Pagination';
 // import { Link } from "react-router-dom";
 // import PaginationItem from "@material-ui/lab/PaginationItem";
+import PaginationControlled from './Pagination';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,8 +26,8 @@ const Content = (props) => {
     return (
         <div className={classes.root}>
             {props.arr.map((val, index) => <JobCardContainer cardIndex={index} key={index}/>)}
+            <PaginationControlled currentPage={props.currentPage} pages={props.pages}/>
         </div>
     );
 }
-
 export default Content;

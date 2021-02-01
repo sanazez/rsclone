@@ -8,6 +8,7 @@ import {
 import SearchHeader from './Search'
 import {connect} from 'react-redux';
 import * as axios from 'axios';
+import {apiGetKeywordFromSearch, apiSearch} from "../../../api/api";
 
 
 class SearchContainer extends React.Component {
@@ -25,7 +26,7 @@ class SearchContainer extends React.Component {
 
     searchJobsOnClick = (text) => {
         console.log(text, this.props.period)
-        axios.get(`http://localhost:9000/testAPI/search?search=${text}&area=${this.props.cityId}&period=${this.props.period}&experience=${this.props.experience}`)
+        apiSearch(text, this.props.cityId, this.props.period, this.props.experience)
             .then(res => {
                 console.log(res.data)
                 if (res.data.items && res.data.items.length) {
@@ -35,7 +36,7 @@ class SearchContainer extends React.Component {
     }
 
     getKeywordFromSearch = (text) => {
-        axios.get(`http://localhost:9000/keyword?word=${text}`)
+        apiGetKeywordFromSearch(text)
             .then(res => {
                 if (this.props.searchText.length >= 2) {
                     if (res.data.items) this.props.getKeyWords(res.data.items);
