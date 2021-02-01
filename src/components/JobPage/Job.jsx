@@ -11,6 +11,7 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import SimilarJobs from './SimilarJobs';
 
 const useStyles = makeStyles({
   root: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
     maxWidth: 230
   },
   profileMain: {
-    maxWidth: 965,
+    width: '80%',
     display: 'flex',
     flexDirection: 'column',
     margin: '0 auto',
@@ -95,6 +96,13 @@ const useStyles = makeStyles({
   },
   tmpl_hh_wrapper: {
     maxWidth: '100%'
+  },
+  section: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    transform: 'skewY(-1deg)',
+    padding: '50px 10px'
   }
 });
 
@@ -103,7 +111,14 @@ const JobProfile = (props) => {
   if (!props.profileInfo.id) {
     return <article></article>
   }
-  // console.log(props.similarJobs);
+  let similarJobsNumber = 0;
+  if (props.similarJobs.items && props.similarJobs.items.length) {
+    similarJobsNumber = props.similarJobs.items.length > 2 ? 3 : props.similarJobs.items.length;
+  }
+  let similarJobsForRender = [];
+  for (let i = 0; i < similarJobsNumber; i++) {
+    similarJobsForRender.push(props.similarJobs.items[i]);
+  }
   let logo = props.profileInfo.employer.logo_urls;
   const phones = () => {
     if (props.profileInfo.contacts && props.profileInfo.contacts.phones && props.profileInfo.contacts.phones.length) {
@@ -200,12 +215,15 @@ const JobProfile = (props) => {
           </AccordionSummary>
           <AccordionDetails className={classes.contactInfo}>
             <Typography gutterBottom variant="h6" component="h6">
-              {props.profileInfo.experience ? (props.profileInfo.experience.name ?  props.profileInfo.experience.name : '') : ''}
+              {props.profileInfo.experience ? (props.profileInfo.experience.name ? props.profileInfo.experience.name : '') : ''}
             </Typography>
           </AccordionDetails>
         </Accordion>
       </div>
       <div className={classes.profileDescription} dangerouslySetInnerHTML={{ __html: props.profileInfo.branded_description ? props.profileInfo.branded_description : props.profileInfo.description }}></div>
+      <div className={classes.section}>
+        {similarJobsForRender.map((val, index) => <SimilarJobs similarJob={val} key={index} />)}
+      </div>
     </main>
   </article>
 }
