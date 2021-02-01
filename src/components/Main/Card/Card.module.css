@@ -4,13 +4,12 @@
     position: relative;
     text-align: justify;
     padding-right: 1em;
-    max-width: 385px;
+    max-width: 600px;
 }
 .positionName {
     margin-bottom: 14px;
     font-size: 1.2rem;
     line-height: 1.2em;
-    max-width: 385px;
     max-height: 45px;
 }
 .companyName {
