@@ -28,7 +28,6 @@ class ContentContainer extends React.Component {
     if (this.unsubscribeFromHistory) this.unsubscribeFromHistory();
   }
   changePageInfo(value) {
-    console.log(value);
     this.props.onChangePage(value);
     axios.get(`http://localhost:9000/page?page=${value - 1}`)
       .then(res => {
