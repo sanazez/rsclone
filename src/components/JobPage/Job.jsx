@@ -111,18 +111,14 @@ const JobProfile = (props) => {
   if (!props.profileInfo.id) {
     return <article></article>
   }
-
-
   let similarJobsNumber = 0;
   if (props.similarJobs.items && props.similarJobs.items.length) {
-    console.log(props.similarJobs);
     similarJobsNumber = props.similarJobs.items.length > 2 ? 3 : props.similarJobs.items.length;
   }
   let similarJobsForRender = [];
   for (let i = 0; i < similarJobsNumber; i++) {
     similarJobsForRender.push(props.similarJobs.items[i]);
   }
-
   let logo = props.profileInfo.employer.logo_urls;
   const phones = () => {
     if (props.profileInfo.contacts && props.profileInfo.contacts.phones && props.profileInfo.contacts.phones.length) {
