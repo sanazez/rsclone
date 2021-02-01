@@ -12,6 +12,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SimilarJobs from './SimilarJobs';
+import similarJobAudio from '../../sounds/click1.mp3';
+import accordionAudio from '../../sounds/click3.mp3';
 
 const useStyles = makeStyles({
   root: {
@@ -108,6 +110,15 @@ const useStyles = makeStyles({
 
 const JobProfile = (props) => {
   const classes = useStyles();
+
+  function handleSimilarJobSound() {
+    const soundSimilarJob = new Audio(similarJobAudio);
+    soundSimilarJob.play();
+  }
+  function handleAccordionSound() {
+    const soundAccordion = new Audio(accordionAudio);
+    soundAccordion.play();
+  }
   if (!props.profileInfo.id) {
     return <article></article>
   }
@@ -173,6 +184,7 @@ const JobProfile = (props) => {
       <div className={classes.profileAccordion}>
         <Accordion>
           <AccordionSummary
+            onClick={handleAccordionSound}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
@@ -193,6 +205,7 @@ const JobProfile = (props) => {
         </Accordion>
         <Accordion>
           <AccordionSummary
+            onClick={handleAccordionSound}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
@@ -207,6 +220,7 @@ const JobProfile = (props) => {
         </Accordion>
         <Accordion>
           <AccordionSummary
+            onClick={handleAccordionSound}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
@@ -222,7 +236,7 @@ const JobProfile = (props) => {
       </div>
       <div className={classes.profileDescription} dangerouslySetInnerHTML={{ __html: props.profileInfo.branded_description ? props.profileInfo.branded_description : props.profileInfo.description }}></div>
       <div className={classes.section}>
-        {similarJobsForRender.map((val, index) => <SimilarJobs similarJob={val} key={index} />)}
+        {similarJobsForRender.map((val, index) => <SimilarJobs onClick={handleSimilarJobSound} similarJob={val} key={index} />)}
       </div>
     </main>
   </article>

@@ -5,6 +5,7 @@ import InputBase from '@material-ui/core/InputBase';
 import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 import {Button} from '@material-ui/core';
 import classes from './Search.module.css';
+import searchAudio from '../../../sounds/click2.mp3';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -64,6 +65,8 @@ const SearchHeader = (props) => {
 
     const searchJobsOnclickButton = () => {
         onSearchJobs(props.searchText);
+        const soundSearch = new Audio(searchAudio);
+        soundSearch.play();
     }
     const styles = useStyles();
     return (
