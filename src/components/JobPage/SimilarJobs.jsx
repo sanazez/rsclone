@@ -15,7 +15,7 @@ const SimilarJobs = (props) => {
         }
         return (Math.round(res) === 1) ? '1 day ago' : `${Math.round(res)} days ago`
     }
-    return <a href={`/job/${props.similarJob.id}`} className={classes.similarJobContainer}>
+    return <a onMouseDown={props.onClick} href={`/job/${props.similarJob.id}`} className={classes.similarJobContainer}>
         <div className={classes.similarJobLogo}>
             <img src={logo ? logo.original : noLogo} alt="company logo" />
         </div>
