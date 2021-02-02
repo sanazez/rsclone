@@ -5,7 +5,6 @@ import JobProfileContainer from './components/JobPage/JobContainer';
 import { Route } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
-import Footer from './components/Footer/Footer';
 
 
 const App = (props) => {
@@ -18,7 +17,6 @@ const App = (props) => {
         <Route exact path='/page/:pageId' component={MainPage} />
         <Route exact path='/job/:jobId' render={() => <JobProfileContainer />} />
       </Switch>
-      <Footer />
     </div>
   );
 }

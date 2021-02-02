@@ -1,11 +1,10 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import JobProfile from './Job';
-import * as axios from 'axios';
-import {loadJobProfileActionCreater} from '../../redux/header-reducer';
-import {loadSimilarJobsActionCreater} from '../../redux/header-reducer';
-import {apiJobContainerCodedJob, apiJobContainerIdJob} from "../../api/api";
+import { loadJobProfileActionCreater } from '../../redux/header-reducer';
+import { loadSimilarJobsActionCreater } from '../../redux/header-reducer';
+import { apiJobContainerCodedJob, apiJobContainerIdJob } from "../../api/api";
 
 function countDays(creatureDate) {
     let res = Date.now() - Date.parse(creatureDate);
@@ -29,18 +28,20 @@ class JobProfileContainer extends React.Component {
                 this.props.onLoadSimilarJobs(res.data);
             })
     }
-
     render() {
         return <JobProfile profileInfo={this.props.profileInfo} countDays={this.props.countDays}
-                           similarJobs={this.props.similarJobs}/>
+            similarJobs={this.props.similarJobs} />
     }
 }
 
-const mapStateToProps = (state) => ({
-    profileInfo: state.headerElement.jobPage,
-    similarJobs: state.headerElement.similarJobs,
-    countDays
-});
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        profileInfo: state.headerElement.jobPage,
+        similarJobs: state.headerElement.similarJobs,
+        countDays
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {

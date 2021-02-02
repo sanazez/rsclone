@@ -11,9 +11,11 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import SimilarJobs from './SimilarJobs';
+import SimilarJobs from './SimilarJobs/SimilarJobs';
 import similarJobAudio from '../../sounds/click1.mp3';
 import accordionAudio from '../../sounds/click3.mp3';
+import Avatar from '@material-ui/core/Avatar';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 const useStyles = makeStyles({
   root: {
@@ -105,12 +107,36 @@ const useStyles = makeStyles({
     justifyContent: 'space-around',
     transform: 'skewY(-1deg)',
     padding: '50px 10px'
+  },
+  skeletonRoot: {
+    width: '90%',
+    height: '100vh',
+    margin: '0 auto',
+    paddingTop: 50
+  },
+  skeletonHeader: {
+    display: 'flex'
   }
 });
 
 const JobProfile = (props) => {
   const classes = useStyles();
-
+  if (!props.profileInfo.id) {
+    return <div className={classes.skeletonRoot}>
+      <div className={classes.skeletonHeader}>
+        <Skeleton className={classes.skeletonAvatar} variant="circle">
+          <Avatar />
+        </Skeleton>
+        <Skeleton className={classes.skeletonTitle} width="100%">
+          <Typography>.</Typography>
+        </Skeleton>
+      </div>
+      <Skeleton className={classes.skeletonText} variant="rect" width="100%">
+        <div style={{ paddingTop: '57%' }} />
+      </Skeleton>
+    </div>
+  }
+  console.log(props);
   function handleSimilarJobSound() {
     const soundSimilarJob = new Audio(similarJobAudio);
     soundSimilarJob.play();
@@ -139,8 +165,6 @@ const JobProfile = (props) => {
     }
   }
   return <article className={classes.root}>
-    <aside className={classes.profileSidebar}>
-    </aside>
     <main className={classes.profileMain}>
       <div className={classes.profileTitle}>
         <Typography className={classes.profileTitleText} variant="h4" gutterBottom>
@@ -193,7 +217,7 @@ const JobProfile = (props) => {
           </AccordionSummary>
           <AccordionDetails className={classes.contactInfo}>
             <Typography>
-              <a href={`mailto:${props.profileInfo.contacts ? (props.profileInfo.contacts.email ? props.profileInfo.contacts.email : '') : ''}`}>{`${props.profileInfo.contacts ? (props.profileInfo.contacts.email ? props.profileInfo.contacts.email : '') : ''}`}</a>
+              <a href={`${props.profileInfo.contacts ? (props.profileInfo.contacts.email ? `mailto:${props.profileInfo.contacts.email}` : '') : props.profileInfo.alternate_url}`}>{`${props.profileInfo.contacts ? (props.profileInfo.contacts.email ? props.profileInfo.contacts.email : '') : 'Откликнуться'}`}</a>
             </Typography>
             <Typography>
               {`${props.profileInfo.contacts ? (props.profileInfo.contacts.name ? props.profileInfo.contacts.name : '') : ''}`}

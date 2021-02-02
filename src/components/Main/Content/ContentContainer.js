@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Content from './Content';
 import {changePageCreater} from '../../../redux/header-reducer';
-import * as axios from 'axios';
 import {withRouter} from 'react-router-dom';
 import {loadAllActionCreater} from '../../../redux/header-reducer';
 import apiForContent from "../../../api/api";

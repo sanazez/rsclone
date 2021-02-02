@@ -1,4 +1,3 @@
-import React from 'react';
 import {connect} from 'react-redux';
 import {MarkCheckBoxEmploymentAC} from "../../../../../redux/sidebar-reducer";
 import Employment from "./Employmen";

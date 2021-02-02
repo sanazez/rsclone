@@ -18,6 +18,9 @@
     background-repeat: no-repeat;
     background-position: center;
     transition-duration: 0.3s;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .footerRSLink:hover {
     transform: scale(1.1);
