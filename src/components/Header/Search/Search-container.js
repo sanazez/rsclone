@@ -7,7 +7,6 @@ import {
 } from '../../../redux/header-reducer';
 import SearchHeader from './Search'
 import {connect} from 'react-redux';
-import * as axios from 'axios';
 import {apiGetKeywordFromSearch, apiSearch} from "../../../api/api";
 
 

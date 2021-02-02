@@ -23,7 +23,6 @@ const Sidebar = (props) => {
 
     }
     return <aside className={classes.sidebar}>
-        <h3>LOCATION</h3>
         <Grid className={classes.searchContiner} container spacing={1} alignItems="flex-end">
             <Grid item>
                 <PublicIcon className={classes.search}/>

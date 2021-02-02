@@ -2,7 +2,6 @@ const UPDATE_SEARCH_TEXT = 'UPDATE-SEARCH-TEXT';
 const LOAD_JOBS = 'LOAD-JOBS';
 const CHANGE_PAGE = 'CHANGE_PAGE';
 const LOAD_PROFILE = 'LOAD_PROFILE';
-const CHANGE_CITY = 'CHANGE-CITY';
 const FULL_TIME = 'FULL-TIME';
 const KEY_WORDS = 'KEY-WORDS';
 const CLEAR_KEY_WORDS = 'CLEAR-KEY-WORDS';
@@ -56,26 +55,6 @@ export const headerReducer = (state = initialState, action) => {
             return stateCopy;
         }
 
-        case CHANGE_CITY: {
-            let stateCopy = {...state};
-            stateCopy.currentCity = action.city;
-            let filterJobs = state.allJobs.filter(job => {
-                return job.location === action.city;
-            });
-            if (filterJobs.length) {
-                stateCopy.allResults = [...filterJobs];
-                stateCopy.searchResults = [];
-                let startNumber = 5;
-                if (stateCopy.allResults.length < 5) {
-                    startNumber = stateCopy.allResults.length
-                }
-                for (let i = 0; i < startNumber; i++) {
-                    stateCopy.searchResults.push(stateCopy.allResults[i]);
-                }
-            }
-            return stateCopy;
-        }
-
         case KEY_WORDS: {
             let stateCopy = {...state};
             stateCopy.keyWords = action.keyWords;
@@ -113,12 +92,6 @@ export const getKeyWordsAC = (keyWords, numberSymbols) => {
     }
 }
 
-export const changeCityAC = (city) => {
-    return {
-        type: CHANGE_CITY,
-        city: city
-    }
-}
 
 export const selectFullTimeAC = () => {
     return {

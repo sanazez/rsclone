@@ -1,5 +1,5 @@
 import headerReducer from './header-reducer';
-import { clearKeyWordsAC, getKeyWordsAC, changeCityAC, selectFullTimeAC, updateSearchTextActionCreater, loadAllActionCreater, changePageCreater, loadJobProfileActionCreater, loadSimilarJobsActionCreater } from './header-reducer';
+import { clearKeyWordsAC, getKeyWordsAC, selectFullTimeAC, updateSearchTextActionCreater, loadAllActionCreater, changePageCreater, loadJobProfileActionCreater, loadSimilarJobsActionCreater } from './header-reducer';
 
 let initialState = {
     searchText: '',
@@ -43,16 +43,6 @@ it('state should get and store info for job profile, tests loadJobProfileActionC
     let newState = headerReducer(initialState, action);
     expect(newState.jobPage.id).toBe(52);
     expect(newState.jobPage.title).toBe('some kind of worker');
-});
-
-it('state should get and store info about similar jobs, tests loadSimilarJobsActionCreater', () => {
-    const info = [{id: 52, title: 'some kind of worker'}, {id: 47, title: 'another kind of worker'}, {id: 1, title: 'different kind of worker'}];
-    let action = loadSimilarJobsActionCreater(info);
-    let newState = headerReducer(initialState, action);
-    expect(newState.similarJobs[2].id).toBe(1);
-    expect(newState.similarJobs[0].title).toBe('some kind of worker');
-    expect(newState.similarJobs[1].title).toBe('another kind of worker');
-    expect(newState.similarJobs.length).toBe(3);
 });
 
 it('state should get and store info about similar jobs, tests loadSimilarJobsActionCreater', () => {
