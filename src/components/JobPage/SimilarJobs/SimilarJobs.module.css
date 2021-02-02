@@ -85,14 +85,17 @@
     display: flex;
     max-width: 200px;
     color: #b9bdcf;
-    padding: 2px;
+    padding: 0 8px;
     position: absolute;
     right: 2%;
     bottom: 2%;
 }
-.jobUpdate {
-    margin-left: 13px;
+.jobUpdateIcon {
+    margin-left: 12px;
     margin-right: 3px;
+}
+.jobUpdate {
+    max-width: 50px;
 }
 .jobLocation {
     margin-right: 3px;

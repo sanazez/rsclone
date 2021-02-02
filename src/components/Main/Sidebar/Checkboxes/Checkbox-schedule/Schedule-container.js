@@ -1,4 +1,3 @@
-import React from 'react';
 import {connect} from 'react-redux';
 import {MarkCheckBoxScheduleAC} from "../../../../../redux/sidebar-reducer";
 import Schedule from "./Schedule";

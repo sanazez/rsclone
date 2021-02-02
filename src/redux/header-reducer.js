@@ -12,7 +12,7 @@ const initialState = {
     searchText: '',
     searchResults: [],
     allResults: [],
-    jobPage: [],
+    jobPage: {},
     similarJobs: [],
     pageId: null,
     pagesNumber: 1,

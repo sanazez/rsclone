@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Sidebar from './Sidebar';
 import {loadAllActionCreater} from "../../../redux/header-reducer";
-import * as axios from "axios";
 import {getKeyWordsCitiesAC, setCurrentCityAC, updateSearchTextCities} from "../../../redux/sidebar-reducer";
 import {apiGetKeyWordsCities, apiSearch} from "../../../api/api";
 

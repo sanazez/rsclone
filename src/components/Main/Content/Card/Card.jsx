@@ -8,9 +8,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import PublicIcon from '@material-ui/icons/Public';
 import Skeleton from '@material-ui/lab/Skeleton';
-import noLogo from '../../../img/no-logo.png';
+import noLogo from '../../../../img/no-logo.png';
 import { NavLink } from 'react-router-dom';
-import audio from '../../../sounds/click1.mp3';
+import audio from '../../../../sounds/click1.mp3';
 import styles from './Card.module.css';
 
 const useStyles = makeStyles({
@@ -70,14 +70,22 @@ const useStyles = makeStyles({
 
 const JobCard = (props) => {
   const classes = useStyles();
-  const soundCard = new Audio(audio);
+
   if (!props.title) {
     return <Card className={classes.preloader} >
       <Skeleton className={classes.preloaderContent} variant="text" animation="wave" />
     </Card>
   }
+  function clickCard() {
+    const soundCard = new Audio(audio);
+    soundCard.play();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
   return <NavLink to={`/job/${props.jobId}`}>
-  <Card onClick={() => soundCard.play()} className={classes.root}>
+    <Card onClick={clickCard} className={classes.root}>
       <CardActionArea className={classes.actionArea}>
         <CardMedia
           className={classes.cardImg}
@@ -108,7 +116,7 @@ const JobCard = (props) => {
         </CardContent>
       </CardActionArea>
     </Card>
-</NavLink>
+  </NavLink>
 }
 
 export default JobCard;

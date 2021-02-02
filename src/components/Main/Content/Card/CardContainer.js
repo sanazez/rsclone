@@ -1,14 +1,20 @@
 import {connect} from 'react-redux';
 import JobCard from './Card';
-import noLogo from '../../../img/no-logo.png';
+import noLogo from '../../../../img/no-logo.png';
 
 function countDays(creatureDate) {
     let res = Date.now() - Date.parse(creatureDate);
     res /= (1000 * 60 * 60 * 24);
     if (res < 1) {
-        return 'today'
+        return 'сегодня'
     }
-    return (Math.round(res) === 1) ? '1 day ago' : `${Math.round(res)} days ago`
+    let daysText = 'дней назад';
+    if (Math.round(res) % 10 === 1 && Math.round(res) !== 11) {
+        daysText = 'день назад'
+    } else if (Math.round(res) % 10 > 1 && Math.round(res) % 10 < 5 && Math.round(res) !== 12 && Math.round(res) !== 13 && Math.round(res) !== 14) {
+        daysText = 'дня назад'
+    }
+    return `${Math.round(res)} ${daysText}`
 }
 
 let mapStateToProps = (state, props) => {
