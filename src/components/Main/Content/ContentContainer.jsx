@@ -16,10 +16,9 @@ class ContentContainer extends React.Component {
                 this.changePageInfo(routedPage[2]);
             }
         });
-
         let searchPage = this.props.match.params.pageId ? this.props.match.params.pageId : (this.props.currentPage || 1);
         this.props.onChangePage(this.props.match.params.pageId);
-        apiForContent(searchPage, this.props.searchText, this.props.currentCityId, this.props.period, this.props.experience)
+        apiForContent(searchPage, this.props.searchText, this.props.currentCityId, this.props.period, this.props.experience, this.props.schedule, this.props.employment)
             .then(res => {
                 if (res.data.items && res.data.items.length) {
                     this.props.setJobs(res.data.items, res.data.pages)
@@ -33,10 +32,10 @@ class ContentContainer extends React.Component {
 
     changePageInfo(value) {
         this.props.onChangePage(value);
-        apiForContent(value, this.props.searchText, this.props.currentCityId, this.props.period, this.props.experience)
+        apiForContent(value, this.props.searchText, this.props.currentCityId, this.props.period, this.props.experience, this.props.schedule, this.props.employment)
             .then(res => {
                 if (res.data.items && res.data.items.length) {
-                    this.props.setJobs(res.data.items, res.data.pages)
+                    this.props.setJobs(res.data.items, res.data.pages);
                 }
             })
     }
@@ -64,6 +63,8 @@ const mapStateToProps = (state) => {
         currentCityId: state.sidebarState.currentCityId,
         period: state.sidebarState.period,
         experience: state.sidebarState.experience,
+        schedule: state.sidebarState.schedule,
+        employment: state.sidebarState.employment
     }
 }
 

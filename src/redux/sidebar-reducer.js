@@ -3,6 +3,8 @@ const UPDATE_SEARCH_TEXT_CITIES = 'UPDATE-SEARCH-TEXT-CITIES';
 const SET_CURRENT_CITY = 'SET-CURRENT-CITY';
 const CHANGE_VALUE_SELECT_TIME = 'CHANGE-VALUE-SELECT-TIME';
 const CHANGE_VALUE_SELECT_EXPERIENCE = 'CHANGE-VALUE-SELECT-EXPERIENCE';
+const MARK_CHECKBOX_EMPLOYMENT = 'MARK-CHECKBOX-EMPLOYMENT';
+const MARK_CHECKBOX_SCHEDULE = 'MARK-CHECKBOX-SCHEDULE';
 
 const initialState = {
     keyWords: [],
@@ -10,6 +12,8 @@ const initialState = {
     currentCityId: '',
     period: 0,
     experience: 0,
+    employment: [],
+    schedule: []
 }
 
 const sidebarReducer = (state = initialState, action) => {
@@ -40,7 +44,6 @@ const sidebarReducer = (state = initialState, action) => {
             let copyState = {...state};
             copyState.period = action.value;
 
-            console.log(action.value);
             return copyState;
         }
         case CHANGE_VALUE_SELECT_EXPERIENCE: {
@@ -48,8 +51,41 @@ const sidebarReducer = (state = initialState, action) => {
             copyState.experience = action.value;
             return copyState;
         }
+        case MARK_CHECKBOX_EMPLOYMENT: {
+            let copyState = {...state};
+            if (action.isSelect) {
+                copyState.employment = [...state.employment, action.value];
+            } else {
+                copyState.employment = state.employment.filter(item => item !== action.value);
+            }
+            return copyState
+        }
+        case MARK_CHECKBOX_SCHEDULE: {
+            let copyState = {...state};
+            if (action.isSelect) {
+                copyState.schedule = [...state.schedule, action.value];
+            } else {
+                copyState.schedule = state.schedule.filter(item => item !== action.value);
+            }
+            return copyState
+        }
         default:
             return state;
+    }
+}
+export const MarkCheckBoxScheduleAC = (value, isSelect) => {
+    return {
+        type: MARK_CHECKBOX_SCHEDULE,
+        value,
+        isSelect
+    }
+}
+
+export const MarkCheckBoxEmploymentAC = (value, isSelect) => {
+    return {
+        type: MARK_CHECKBOX_EMPLOYMENT,
+        value,
+        isSelect
     }
 }
 

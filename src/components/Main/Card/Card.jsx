@@ -10,6 +10,8 @@ import PublicIcon from '@material-ui/icons/Public';
 import Skeleton from '@material-ui/lab/Skeleton';
 import noLogo from '../../../img/no-logo.png';
 import { NavLink } from 'react-router-dom';
+import audio from '../../../sounds/click1.mp3';
+import styles from './Card.module.css';
 
 const useStyles = makeStyles({
   root: {
@@ -40,17 +42,6 @@ const useStyles = makeStyles({
     height: 90,
     objectFit: 'contain'
   },
-  companyName: {
-    fontSize: 14,
-    color: '#334680',
-    fontWeight: 'bold',
-    marginBottom: 5
-  },
-  positionName: {
-    fontSize: 20,
-    color: '#334680',
-    marginBottom: 14
-  },
   jobType: {
     color: '#334680',
     fontSize: 12,
@@ -79,14 +70,14 @@ const useStyles = makeStyles({
 
 const JobCard = (props) => {
   const classes = useStyles();
-
+  const soundCard = new Audio(audio);
   if (!props.title) {
     return <Card className={classes.preloader} >
       <Skeleton className={classes.preloaderContent} variant="text" animation="wave" />
     </Card>
   }
   return <NavLink to={`/job/${props.jobId}`}>
-  <Card className={classes.root}>
+  <Card onClick={() => soundCard.play()} className={classes.root}>
       <CardActionArea className={classes.actionArea}>
         <CardMedia
           className={classes.cardImg}
@@ -95,12 +86,12 @@ const JobCard = (props) => {
           image={props.logo ? props.logo : noLogo}
         />
         <CardContent>
-          <Typography className={classes.companyName} variant="body2" color="textSecondary" component="p">
+          <p className={styles.companyName}>
             {props.company}
-          </Typography>
-          <Typography className={classes.positionName} gutterBottom variant="h5" component="h2">
+          </p>
+          <h2 className={styles.positionName}>
             {props.title}
-          </Typography>
+          </h2>
           <Typography className={classes.jobType} variant="body2" color="textSecondary" component="p">
             {props.type}
           </Typography>

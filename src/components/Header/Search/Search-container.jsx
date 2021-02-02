@@ -26,7 +26,7 @@ class SearchContainer extends React.Component {
 
     searchJobsOnClick = (text) => {
         console.log(text, this.props.period)
-        apiSearch(text, this.props.cityId, this.props.period, this.props.experience)
+        apiSearch(text, this.props.cityId, this.props.period, this.props.experience, this.props.schedule, this.props.employment)
             .then(res => {
                 console.log(res.data)
                 if (res.data.items && res.data.items.length) {
@@ -59,6 +59,8 @@ const mapStateToProps = (state) => {
         cityId: state.sidebarState.currentCityId,
         period: state.sidebarState.period,
         experience: state.sidebarState.experience,
+        schedule: state.sidebarState.schedule,
+        employment: state.sidebarState.employment
     }
 }
 

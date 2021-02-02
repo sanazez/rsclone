@@ -55,11 +55,7 @@
     background-color: #E1E1E1;
 }
 
-.checkBox span {
-    padding: 2px;
-}
-
-.typeJobs, .schedule, .experience, .showJobs {
+.experience, .showJobs {
     display: flex;
     flex-direction: column;
     margin-top: 20px;

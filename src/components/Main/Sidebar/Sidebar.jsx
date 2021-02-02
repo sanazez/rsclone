@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import PublicIcon from '@material-ui/icons/Public';
 import SelectTime from "./Selects/Select-time/Select-time-container";
 import SelectExperience from "./Selects/Select-experience/Select-experience-container";
+import EmploymentContainer from "./Checkboxes/Checkbox-employment/Employment-container";
+import ScheduleContainer from "./Checkboxes/Checkbox-schedule/Schedule-container";
 
 
 const Sidebar = (props) => {
@@ -52,49 +54,11 @@ const Sidebar = (props) => {
         <div className={classes.filter}>
             <div className={classes.typeJobs}>
                 <h4>Тип занятости</h4>
-                <FormControlLabel
-                    className={classes.checkBox}
-                    control={<Checkbox name="fullTime" color="primary"/>}
-                    label="Полная занятость"
-                />
-                <FormControlLabel
-                    className={classes.checkBox}
-                    control={<Checkbox name="fullTime" color="primary"/>}
-                    label="Частичная занятость"
-                />
-                <FormControlLabel
-                    className={classes.checkBox}
-                    control={<Checkbox name="fullTime" color="primary"/>}
-                    label="Стажировка"
-                />
-                <FormControlLabel
-                    className={classes.checkBox}
-                    control={<Checkbox name="fullTime" color="primary"/>}
-                    label="Волонтерство"
-                />
+                <EmploymentContainer/>
             </div>
             <div className={classes.schedule}>
                 <h4>График работы</h4>
-                <FormControlLabel
-                    className={classes.checkBox}
-                    control={<Checkbox name="fullTime" color="primary"/>}
-                    label="Полный день"
-                />
-                <FormControlLabel
-                    className={classes.checkBox}
-                    control={<Checkbox name="fullTime" color="primary"/>}
-                    label="Сменный график"
-                />
-                <FormControlLabel
-                    className={classes.checkBox}
-                    control={<Checkbox name="fullTime" color="primary"/>}
-                    label="Гибкий график"
-                />
-                <FormControlLabel
-                    className={classes.checkBox}
-                    control={<Checkbox name="fullTime" color="primary"/>}
-                    label="Удаленная работа"
-                />
+                <ScheduleContainer/>
             </div>
             <div className={classes.experience}>
                 <h4>Требуемый опыт работы</h4>
