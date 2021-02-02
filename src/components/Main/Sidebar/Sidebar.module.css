@@ -40,7 +40,7 @@
 }
 
 .list {
-
+    position: relative;
     list-style-type: none;
     background-color: white;
     z-index: 100;

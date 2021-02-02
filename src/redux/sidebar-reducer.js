@@ -5,6 +5,7 @@ const CHANGE_VALUE_SELECT_TIME = 'CHANGE-VALUE-SELECT-TIME';
 const CHANGE_VALUE_SELECT_EXPERIENCE = 'CHANGE-VALUE-SELECT-EXPERIENCE';
 const MARK_CHECKBOX_EMPLOYMENT = 'MARK-CHECKBOX-EMPLOYMENT';
 const MARK_CHECKBOX_SCHEDULE = 'MARK-CHECKBOX-SCHEDULE';
+const TYPE_SORTING_JOBS = 'TYPE-SORTING-JOBS';
 
 const initialState = {
     keyWords: [],
@@ -13,7 +14,8 @@ const initialState = {
     period: 0,
     experience: 0,
     employment: [],
-    schedule: []
+    schedule: [],
+    typeSorting: 'relevance'
 }
 
 const sidebarReducer = (state = initialState, action) => {
@@ -37,6 +39,7 @@ const sidebarReducer = (state = initialState, action) => {
             let copyState = {...state};
             copyState.searchCityText = action.city;
             copyState.currentCityId = action.cityId;
+            console.log(copyState.currentCityId)
             copyState.keyWords = [];
             return copyState;
         }
@@ -69,10 +72,22 @@ const sidebarReducer = (state = initialState, action) => {
             }
             return copyState
         }
+        case TYPE_SORTING_JOBS : {
+            let copyState = {...state};
+            copyState.typeSorting = action.sorting;
+            return copyState;
+        }
         default:
             return state;
     }
 }
+export const sortingJobsAC = (sorting) => {
+    return {
+        type: TYPE_SORTING_JOBS,
+        sorting
+    }
+}
+
 export const MarkCheckBoxScheduleAC = (value, isSelect) => {
     return {
         type: MARK_CHECKBOX_SCHEDULE,
