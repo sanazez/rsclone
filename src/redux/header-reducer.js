@@ -23,7 +23,7 @@ const initialState = {
     keyWords: []
 }
 
-const headerReducer = (state = initialState, action) => {
+export const headerReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_SEARCH_TEXT: {
             let stateCopy = {...state};
