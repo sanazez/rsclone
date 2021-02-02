@@ -1,9 +1,9 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
-import {Button} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import classes from './Search.module.css';
 import searchAudio from '../../../sounds/click2.mp3';
 
@@ -64,9 +64,9 @@ const SearchHeader = (props) => {
     }
 
     const searchJobsOnclickButton = () => {
-        onSearchJobs(props.searchText);
         const soundSearch = new Audio(searchAudio);
         soundSearch.play();
+        onSearchJobs(props.searchText);
     }
     const styles = useStyles();
     return (
@@ -79,21 +79,21 @@ const SearchHeader = (props) => {
                             onSearchJobs(word.text);
                         }
                         return <li className={classes.item} onMouseUp={getJobsByKeyWords}
-                                   key={index}>{word.text}</li>
+                            key={index}>{word.text}</li>
                     })}
                 </ul>
             </div>
-            <WorkOutlineIcon className={styles.iconWork}/>
+            <WorkOutlineIcon className={styles.iconWork} />
             <InputBase
                 className={`${styles.input} ${classes.search}`}
-                placeholder="Title, companies, expertise or benefits"
-                inputProps={{'aria-label': 'search jobs'}}
+                placeholder="Профессия, компания или навыки"
+                inputProps={{ 'aria-label': 'search jobs' }}
                 value={props.searchText}
                 inputRef={searchElement}
                 onChange={onSearchChange}
             />
-            <Button variant="contained" color="primary" onMouseUp={searchJobsOnclickButton}>
-                Search
+            <Button variant="contained" color="primary" onMouseDown={searchJobsOnclickButton}>
+                Поиск
             </Button>
         </Paper>
     );

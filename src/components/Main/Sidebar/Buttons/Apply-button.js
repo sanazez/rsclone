@@ -1,7 +1,7 @@
 import React from 'react';
-import {withStyles, makeStyles} from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
+import confirmAudio from '../../../../sounds/click2.mp3';
 
 const BootstrapButton = withStyles({
     root: {
@@ -50,7 +50,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ApplyButton(props) {
     const classes = useStyles();
-
+    const clickConfirm = () => {
+        console.log('ok');
+        const soundConfirm = new Audio(confirmAudio);
+        soundConfirm.play();
+        props.getJobs();
+    }
     return (
         <div>
             {/*  <ColorButton variant="contained" color="primary" className={classes.margin}>
@@ -61,9 +66,9 @@ export default function ApplyButton(props) {
                     Theme Provider
                 </Button>
             </ThemeProvider>*/}
-            <BootstrapButton onMouseUp={props.getJobs} variant="contained" color="primary" disableRipple
-                             className={classes.margin}>
-                Применить
+            <BootstrapButton onMouseUp={clickConfirm} variant="contained" color="primary" disableRipple
+                className={classes.margin}>
+                <a href="/page/1">Применить</a>
             </BootstrapButton>
         </div>
     );
