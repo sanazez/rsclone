@@ -32,7 +32,7 @@ class ContentContainer extends React.Component {
 
     changePageInfo(value) {
         this.props.onChangePage(value);
-        apiForContent(value, this.props.searchText, this.props.currentCityId, this.props.period, this.props.experience, this.props.schedule, this.props.employment)
+        apiForContent(value, this.props.searchText, this.props.currentCityId, this.props.period, this.props.experience, this.props.schedule, this.props.employment, this.props.typeSorting)
             .then(res => {
                 if (res.data.items && res.data.items.length) {
                     this.props.setJobs(res.data.items, res.data.pages);
@@ -64,7 +64,8 @@ const mapStateToProps = (state) => {
         period: state.sidebarState.period,
         experience: state.sidebarState.experience,
         schedule: state.sidebarState.schedule,
-        employment: state.sidebarState.employment
+        employment: state.sidebarState.employment,
+        typeSorting: state.sidebarState.typeSorting
     }
 }
 

@@ -1,15 +1,14 @@
 import React from 'react';
 import classes from './Sidebar.module.css';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import PublicIcon from '@material-ui/icons/Public';
-import SelectTime from "./Selects/Select-time/Select-time-container";
+import SelectTimeContainer from "./Selects/Select-time/Select-time-container";
 import SelectExperience from "./Selects/Select-experience/Select-experience-container";
 import EmploymentContainer from "./Checkboxes/Checkbox-employment/Employment-container";
 import ScheduleContainer from "./Checkboxes/Checkbox-schedule/Schedule-container";
-
+import SortingJobsContainer from './Selects/Sorting-jobs/Sorting-jobs-container';
+import ApplyButtonContainer from './Buttons/Apply-button-container';
 
 const Sidebar = (props) => {
     // const handleChange = (event) => {
@@ -21,9 +20,7 @@ const Sidebar = (props) => {
         const text = searchElement.current.value;
         props.updateTextKeyWords(text);
         props.getKeyWords(text);
-        if (e.nativeEvent.key === 'Enter') {
 
-        }
     }
     return <aside className={classes.sidebar}>
         <h3>LOCATION</h3>
@@ -36,7 +33,7 @@ const Sidebar = (props) => {
                     <ul className={classes.list}>
                         {props.cities.map((city, index) => {
                             const getJobsFromCity = () => {
-                                props.getJobs(city.text, city.id);
+                                props.setCity(city.text, city.id);
                             }
                             return <li className={classes.item} key={index} onClick={getJobsFromCity}>
                                 {city.text}
@@ -66,7 +63,14 @@ const Sidebar = (props) => {
             </div>
             <div className={classes.showJobs}>
                 <h4>Показывать вакансии</h4>
-                <SelectTime/>
+                <SelectTimeContainer/>
+            </div>
+            <div className={classes.showJobs}>
+                <h4>Сортировать</h4>
+                <SortingJobsContainer/>
+            </div>
+            <div>
+                <ApplyButtonContainer/>
             </div>
         </div>
     </aside>
