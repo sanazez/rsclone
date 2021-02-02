@@ -13,7 +13,6 @@ class SidebarContainer extends React.Component {
             .then(res => {
                 if (this.props.text.length >= 2) {
                     if (res.data.items) {
-                        console.log(res.data.items)
                         this.props.getKeyWords(res.data.items)
                     }
                 } else {
@@ -24,7 +23,7 @@ class SidebarContainer extends React.Component {
 
     getJobsFromCity = (city, cityId) => {
         this.props.setCity(city, cityId)
-        apiSearch(this.props.searchText, cityId, this.props.period, this.props.experience)
+        apiSearch(this.props.searchText, cityId, this.props.period, this.props.experience, this.props.schedule, this.props.employment)
             .then(res => {
                 if (res.data.items && res.data.items.length) {
                     this.props.setJobs(res.data.items, res.data.pages);
@@ -47,6 +46,8 @@ const mapStateToProps = (state) => {
         searchText: state.headerElement.searchText,
         period: state.sidebarState.period,
         experience: state.sidebarState.experience,
+        schedule: state.sidebarState.schedule,
+        employment: state.sidebarState.employment
     }
 }
 const mapDispatchToProps = (dispatch) => {
