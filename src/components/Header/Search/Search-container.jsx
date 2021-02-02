@@ -8,6 +8,7 @@ import {
 import SearchHeader from './Search'
 import {connect} from 'react-redux';
 import * as axios from 'axios';
+import {apiGetKeywordFromSearch, apiSearch} from "../../../api/api";
 
 
 class SearchContainer extends React.Component {
@@ -24,8 +25,10 @@ class SearchContainer extends React.Component {
     }
 
     searchJobsOnClick = (text) => {
-        axios.get(`http://localhost:9000/testAPI/search?search=${text}`)
+        console.log(text, this.props.period)
+        apiSearch(text, this.props.cityId, this.props.period, this.props.experience, this.props.schedule, this.props.employment)
             .then(res => {
+                console.log(res.data)
                 if (res.data.items && res.data.items.length) {
                     this.props.setJobs(res.data.items, res.data.pages);
                 }
@@ -33,12 +36,11 @@ class SearchContainer extends React.Component {
     }
 
     getKeywordFromSearch = (text) => {
-        console.log(text.length)
-        axios.get(`http://localhost:9000/keyword?word=${text}`)
+        apiGetKeywordFromSearch(text)
             .then(res => {
                 if (this.props.searchText.length >= 2) {
                     if (res.data.items) this.props.getKeyWords(res.data.items);
-                } else this.props.getKeyWords([])
+                } else this.props.getKeyWords([]);
             })
     }
 
@@ -53,7 +55,12 @@ class SearchContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         searchText: state.headerElement.searchText,
-        keyWords: state.headerElement.keyWords
+        keyWords: state.headerElement.keyWords,
+        cityId: state.sidebarState.currentCityId,
+        period: state.sidebarState.period,
+        experience: state.sidebarState.experience,
+        schedule: state.sidebarState.schedule,
+        employment: state.sidebarState.employment
     }
 }
 

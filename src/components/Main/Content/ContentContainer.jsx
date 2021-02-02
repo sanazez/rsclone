@@ -5,42 +5,46 @@ import {changePageCreater} from '../../../redux/header-reducer';
 import * as axios from 'axios';
 import {withRouter} from 'react-router-dom';
 import {loadAllActionCreater} from '../../../redux/header-reducer';
+import apiForContent from "../../../api/api";
 
 class ContentContainer extends React.Component {
-  componentDidMount() {
-    this.props.setJobs([]);
-    this.unsubscribeFromHistory = this.props.history.listen((location, action) => {
-      let routedPage = location.pathname.split('/');
-      if (routedPage[1] === 'page') {
-        this.changePageInfo(routedPage[2]);
-      }
-    });
-    let searchPage = this.props.match.params.pageId ? this.props.match.params.pageId : (this.props.currentPage || 1);
-    this.props.onChangePage(this.props.match.params.pageId);
-    axios.get(`http://localhost:9000/page?page=${searchPage - 1}`)
-      .then(res => {
-        if (res.data.items && res.data.items.length) {
-          this.props.setJobs(res.data.items, res.data.pages)
-        }
-      })
-  }
-  componentWillUnmount() {
-    if (this.unsubscribeFromHistory) this.unsubscribeFromHistory();
-  }
-  changePageInfo(value) {
-    this.props.onChangePage(value);
-    axios.get(`http://localhost:9000/page?page=${value - 1}`)
-      .then(res => {
-        if (res.data.items && res.data.items.length) {
-          this.props.setJobs(res.data.items, res.data.pages);
-        }
-      })
-  }
-  
-  render() {
-    return <Content pages={this.props.pages} arr={this.props.arr} currentPage={this.props.currentPage} onChangePage={this.props.onChangePage} changePageInfo={this.changePageInfo.bind(this)} />
-    
-  }
+    componentDidMount() {
+        this.props.setJobs([]);
+        this.unsubscribeFromHistory = this.props.history.listen((location, action) => {
+            let routedPage = location.pathname.split('/');
+            if (routedPage[1] === 'page') {
+                this.changePageInfo(routedPage[2]);
+            }
+        });
+        let searchPage = this.props.match.params.pageId ? this.props.match.params.pageId : (this.props.currentPage || 1);
+        this.props.onChangePage(this.props.match.params.pageId);
+        apiForContent(searchPage, this.props.searchText, this.props.currentCityId, this.props.period, this.props.experience, this.props.schedule, this.props.employment)
+            .then(res => {
+                if (res.data.items && res.data.items.length) {
+                    this.props.setJobs(res.data.items, res.data.pages)
+                }
+            })
+    }
+
+    componentWillUnmount() {
+        if (this.unsubscribeFromHistory) this.unsubscribeFromHistory();
+    }
+
+    changePageInfo(value) {
+        this.props.onChangePage(value);
+        apiForContent(value, this.props.searchText, this.props.currentCityId, this.props.period, this.props.experience, this.props.schedule, this.props.employment)
+            .then(res => {
+                if (res.data.items && res.data.items.length) {
+                    this.props.setJobs(res.data.items, res.data.pages);
+                }
+            })
+    }
+
+    render() {
+        return <Content pages={this.props.pages} arr={this.props.arr} currentPage={this.props.currentPage}
+                        onChangePage={this.props.onChangePage} changePageInfo={this.changePageInfo.bind(this)}/>
+
+    }
 }
 
 const mapStateToProps = (state) => {
@@ -54,7 +58,13 @@ const mapStateToProps = (state) => {
     return {
         arr: state.headerElement.searchResults,
         pages: state.headerElement.pagesNumber,
-        currentPage: state.headerElement.pageId
+        currentPage: state.headerElement.pageId,
+        searchText: state.headerElement.searchText,
+        currentCityId: state.sidebarState.currentCityId,
+        period: state.sidebarState.period,
+        experience: state.sidebarState.experience,
+        schedule: state.sidebarState.schedule,
+        employment: state.sidebarState.employment
     }
 }
 
