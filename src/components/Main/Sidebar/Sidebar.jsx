@@ -5,47 +5,70 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import PublicIcon from '@material-ui/icons/Public';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
+import SelectTime from "./Selects/Select-time/Select-time-container";
+import SelectExperience from "./Selects/Select-experience/Select-experience-container";
+import EmploymentContainer from "./Checkboxes/Checkbox-employment/Employment-container";
+import ScheduleContainer from "./Checkboxes/Checkbox-schedule/Schedule-container";
+
 
 const Sidebar = (props) => {
     // const handleChange = (event) => {
     //   setState({ ...state, [event.target.name]: event.target.checked });
     // };
-    const getCityOnchangeRadios = (e) => {
-        props.setCity(e.target.value);
-    }
+
     let searchElement = React.createRef();
     const getCityOnChangeTextField = (e) => {
         const text = searchElement.current.value;
+        props.updateTextKeyWords(text);
+        props.getKeyWords(text);
         if (e.nativeEvent.key === 'Enter') {
-            props.setCity(text);
+
         }
     }
     return <aside className={classes.sidebar}>
-        <FormControlLabel
-            className={classes.checkBox}
-            control={<Checkbox name="fullTime" color="primary"/>}
-            label="Full Time"
-        />
         <h3>LOCATION</h3>
         <Grid className={classes.searchContiner} container spacing={1} alignItems="flex-end">
             <Grid item>
                 <PublicIcon className={classes.search}/>
             </Grid>
-            <Grid item>
-                <TextField inputRef={searchElement} id="input-with-icon-grid"
-                           label="City, state or country"
-                           onKeyDown={getCityOnChangeTextField}/>
+            <Grid item className={classes.wrapperCities}>
+                <div className={classes.keywords}>
+                    <ul className={classes.list}>
+                        {props.cities.map((city, index) => {
+                            const getJobsFromCity = () => {
+                                props.getJobs(city.text, city.id);
+                            }
+                            return <li className={classes.item} key={index} onClick={getJobsFromCity}>
+                                {city.text}
+                            </li>
+                        })}
+                    </ul>
+                </div>
+                <TextField autoComplete={'off'} inputRef={searchElement} id="input-with-icon-grid"
+                           label="Введите название города"
+                           onChange={getCityOnChangeTextField}
+                           value={props.textKeyWords}
+                />
             </Grid>
         </Grid>
-        <RadioGroup className={classes.radioBtn} aria-label="city" name="city" value={props.city}
-                    onChange={getCityOnchangeRadios}>
-            <FormControlLabel value="London" control={<Radio color="primary"/>} label="London"/>
-            <FormControlLabel value="Amsterdam" control={<Radio color="primary"/>} label="Amsterdam"/>
-            <FormControlLabel value="Minsk" control={<Radio color="primary"/>} label="Minsk"/>
-            <FormControlLabel value="Berlin" control={<Radio color="primary"/>} label="Berlin"/>
-        </RadioGroup>
+        <div className={classes.filter}>
+            <div className={classes.typeJobs}>
+                <h4>Тип занятости</h4>
+                <EmploymentContainer/>
+            </div>
+            <div className={classes.schedule}>
+                <h4>График работы</h4>
+                <ScheduleContainer/>
+            </div>
+            <div className={classes.experience}>
+                <h4>Требуемый опыт работы</h4>
+                <SelectExperience/>
+            </div>
+            <div className={classes.showJobs}>
+                <h4>Показывать вакансии</h4>
+                <SelectTime/>
+            </div>
+        </div>
     </aside>
 }
 

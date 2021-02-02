@@ -1,5 +1,4 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import JobCard from './Card';
 import noLogo from '../../../img/no-logo.png';
 
