@@ -1,0 +1,41 @@
+.header {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 32px 12px 0;
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.7rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo_company {
+    font-weight: 900;
+}
+
+.logo_text {
+    font-weight: 200;
+}
+
+.wrapper_search {
+    background-image: url('../../img/bg_search.png');
+    background-position: center;
+    max-width: 1200px;
+    width: 100%;
+    height: 140px;
+    border-radius: 8px;
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 18px;
+}
+
+@media screen and (max-width:768px) {
+    .header {
+        padding-top: 12px;
+    }
+}

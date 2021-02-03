@@ -1,0 +1,38 @@
+.mainFooter {
+    background-color: #3f51b5;
+    color: #fff;
+    letter-spacing: 1px;
+    border-radius: 3px;
+}
+.footerContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+}
+.footerRSLink {
+    background-image: url("https://rs.school/images/rs_school_js.svg");
+    height: 20px;
+    width: 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition-duration: 0.3s;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.footerRSLink:hover {
+    transform: scale(1.1);
+}
+.footerGitLinks a {
+    color: #fff;
+    letter-spacing: 1px;
+    transition-duration: 0.3s;
+}
+.footerGitLinks a:first-child {
+    margin-right: 15px;
+}
+.footerGitLinks a:hover {
+    text-shadow: 3px 1px 3px rgb(190 185 185 / 88%);
+}

@@ -1,0 +1,76 @@
+.sidebar {
+    max-width: 380px;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.sidebar h3 {
+    font-size: 18px;
+    color: #B9BDCF;
+
+}
+
+.search {
+    color: #B9BDCF;
+}
+
+.searchContiner {
+    margin-bottom: 25px;
+}
+
+.searchContiner input {
+    width: 315px;
+}
+
+.radioBtn {
+    padding-left: 12px;
+}
+
+.wrapperCities {
+    position: relative;
+}
+
+.keywords {
+    width: 315px;
+    height: 100px;
+    position: absolute;
+    top: 53px;
+}
+
+.list {
+    position: relative;
+    list-style-type: none;
+    background-color: white;
+    z-index: 100;
+}
+
+.item {
+    padding: 5px;
+}
+
+.item:hover {
+    cursor: pointer;
+    background-color: #E1E1E1;
+}
+
+.experience, .showJobs {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.typeJobs label, .schedule label, .experience label {
+    margin: 0;
+    margin-left: 10px;
+}
+
+.filter h4 {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.showJobs {
+
+}

@@ -1,0 +1,30 @@
+.search input::placeholder {
+    font-size: 1rem;
+}
+
+.search input {
+    text-overflow: ellipsis;
+}
+
+.list {
+    list-style-type: none;
+}
+
+.item {
+    font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    padding: 5px;
+}
+
+.item:hover {
+    cursor: pointer;
+    background-color: #E1E1E1;
+
+}
+
+@media screen and (max-width: 500px) {
+    .search input::placeholder {
+        font-size: 0.9rem;
+
+    }
+}

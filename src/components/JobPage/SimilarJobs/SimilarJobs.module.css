@@ -1,0 +1,127 @@
+.similarJobContainer {
+    width: 200px;
+    height: 300px;
+    transition: 0.7s;
+    position: relative;
+}
+.similarJobContainer:nth-child(1) {
+    z-index: 15;
+}
+.similarJobContainer:nth-child(2) {
+    z-index: 10;
+}
+.similarJobContainer:nth-child(3) {
+    z-index: 5;
+}
+.similarJobContainer::after {
+    content: "";
+    background-color: #516f78;
+    width: 100%;
+    height: 15px;
+    position: absolute;
+    top: -15px;
+    transform: skewX(45deg);
+    transform-origin: left bottom;
+}
+.similarJobContainer::before {
+    content: "";
+    background-color: #516f78;
+    height: 100%;
+    width: 15px;
+    position: absolute;
+    top: -8px;
+    left: -15px;
+    transform: skewY(45deg);
+    border-bottom: 150px solid #9d9d9d;
+    box-sizing: border-box;
+}
+.similarJobContainer:hover {
+    transform: translateY(-40px);
+}
+.similarJobContainer:hover .similarJobMain::after {
+    transform: translateY(40px) skewX(45deg);
+    filter: blur(10px);
+    opacity: 0.5;
+}
+.similarJobLogo {
+    background-color: white;
+    color: white;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.similarJobLogo img {
+    height: 100%;
+    width: 80%;
+    object-fit: contain;
+}
+.similarJobMain {
+    background-color: white;
+    color: grey;
+    padding: 15px;
+    height: 150px;
+    box-sizing: border-box;
+    position: relative;
+}
+.similarJobMain::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 175px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: skewX(45deg);
+    transform-origin: left bottom;
+    z-index: -5;
+    background-image: linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.5));
+    pointer-events: none;
+    transition: 0.7s;
+    filter: blur(4px);
+}
+.jobAdditional {
+    display: flex;
+    max-width: 200px;
+    color: #b9bdcf;
+    padding: 0 8px;
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+}
+.jobUpdateIcon {
+    margin-left: 12px;
+    margin-right: 3px;
+}
+.jobUpdate {
+    max-width: 50px;
+}
+.jobLocation {
+    margin-right: 3px;
+}
+.similarJobTitle {
+    font-size: 1rem;
+    overflow: hidden;
+    position: relative;
+    line-height: 1.2em;
+    max-height: 3.7em;
+    text-align: justify;
+    padding-right: 1em;
+    max-width: 11rem;
+}
+.similarJobTitle::before {
+    content: "…";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.similarJobTitle::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: white;
+}
