@@ -2,6 +2,7 @@ import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import confirmAudio from '../../../../sounds/click2.mp3';
+import {NavLink} from "react-router-dom";
 
 const BootstrapButton = withStyles({
     root: {
@@ -46,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
     margin: {
         margin: theme.spacing(1),
     },
+    link: {
+        color: "white"
+    }
 }));
 
 export default function ApplyButton(props) {
@@ -60,17 +64,11 @@ export default function ApplyButton(props) {
     }
     return (
         <div>
-            {/*  <ColorButton variant="contained" color="primary" className={classes.margin}>
-                Custom CSS
-            </ColorButton>
-            <ThemeProvider theme={theme}>
-                <Button variant="contained" color="primary" className={classes.margin}>
-                    Theme Provider
-                </Button>
-            </ThemeProvider>*/}
             <BootstrapButton onMouseUp={clickConfirm} variant="contained" color="primary" disableRipple
                 className={classes.margin}>
-                <a href="/page/1">Применить</a>
+                <NavLink className={classes.link} to={'/page/1'}>
+                    Применить
+                </NavLink>
             </BootstrapButton>
         </div>
     );

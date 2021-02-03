@@ -15,10 +15,8 @@ class SearchContainer extends React.Component {
     }
 
     searchJobsOnClick = (text) => {
-        console.log(text, this.props.period)
         apiSearch(text, this.props.cityId, this.props.period, this.props.experience, this.props.schedule, this.props.employment, this.props.typeSorting)
             .then(res => {
-                console.log(res.data)
                 if (res.data.items && res.data.items.length) {
                     this.props.setJobs(res.data.items, res.data.pages);
                 }
