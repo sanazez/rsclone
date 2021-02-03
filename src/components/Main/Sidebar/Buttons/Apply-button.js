@@ -55,9 +55,11 @@ const useStyles = makeStyles((theme) => ({
 export default function ApplyButton(props) {
     const classes = useStyles();
     const clickConfirm = () => {
-
-        const soundConfirm = new Audio(confirmAudio);
-        soundConfirm.play();
+        let isMute = JSON.parse(window.localStorage.getItem('isMute'));
+        if(!isMute) {
+            const soundConfirm = new Audio(confirmAudio);
+            soundConfirm.play();
+        }
         props.getJobs();
     }
     return (

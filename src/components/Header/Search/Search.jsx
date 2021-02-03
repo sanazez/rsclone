@@ -64,8 +64,11 @@ const SearchHeader = (props) => {
     }
 
     const searchJobsOnclickButton = () => {
-        const soundSearch = new Audio(searchAudio);
-        soundSearch.play();
+        let isMute = JSON.parse(window.localStorage.getItem('isMute'));
+        if(!isMute) {
+            const soundSearch = new Audio(searchAudio);
+            soundSearch.play();
+        }
         onSearchJobs(props.searchText);
     }
     const styles = useStyles();

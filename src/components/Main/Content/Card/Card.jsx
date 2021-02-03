@@ -75,8 +75,11 @@ const JobCard = (props) => {
     </Card>
   }
   function clickCard() {
-    const soundCard = new Audio(audio);
-    soundCard.play();
+    let isMute = JSON.parse(window.localStorage.getItem('isMute'));
+    if(!isMute) {
+      const soundCard = new Audio(audio);
+      soundCard.play();
+    }
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
