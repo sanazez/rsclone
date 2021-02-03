@@ -8,7 +8,7 @@ git clone https://github.com/sanazez/rsclone.git
 
 Open directory
 ```sh
-cd rs-clone
+cd rsclone
 ```
 
 Install dependencies:
