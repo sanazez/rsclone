@@ -6,7 +6,7 @@ import {apiSearch} from "../../../../api/api";
 
 class ApplyButtonContainer extends React.Component {
     getJobsFromFilter = () => {
-        apiSearch(this.props.searchText, Number(this.props.cityId), this.props.period, this.props.experience, this.props.schedule, this.props.employment, this.props.typeSorting)
+               apiSearch(this.props.searchText, Number(this.props.cityId), this.props.period, this.props.experience, this.props.schedule, this.props.employment, this.props.typeSorting)
             .then(res => {
                 if (res.data.items && res.data.items.length) {
                     this.props.setJobs(res.data.items, res.data.pages);
