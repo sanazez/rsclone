@@ -11,6 +11,11 @@ Open directory
 cd rsclone
 ```
 
+Switch to branch develop
+```sh
+git checkout develop
+```
+
 Install dependencies:
 ```sh
 npm install
