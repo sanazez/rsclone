@@ -3,7 +3,6 @@ import JobCardContainer from './Card/CardContainer';
 import { makeStyles } from '@material-ui/core/styles';
 import PaginationControlled from './Pagination/Pagination';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {

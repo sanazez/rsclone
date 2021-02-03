@@ -39,7 +39,6 @@ export const sidebarReducer = (state = initialState, action) => {
             let copyState = {...state};
             copyState.searchCityText = action.city;
             copyState.currentCityId = action.cityId;
-            console.log(copyState.currentCityId)
             copyState.keyWords = [];
             return copyState;
         }

@@ -12,6 +12,7 @@ import noLogo from '../../../../img/no-logo.png';
 import { NavLink } from 'react-router-dom';
 import audio from '../../../../sounds/click1.mp3';
 import styles from './Card.module.css';
+import { BrowserRouter } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -70,7 +71,6 @@ const useStyles = makeStyles({
 
 const JobCard = (props) => {
   const classes = useStyles();
-
   if (!props.title) {
     return <Card className={classes.preloader} >
       <Skeleton className={classes.preloaderContent} variant="text" animation="wave" />
@@ -84,7 +84,7 @@ const JobCard = (props) => {
       behavior: 'smooth'
     });
   }
-  return <NavLink to={`/job/${props.jobId}`}>
+  return <BrowserRouter><NavLink to={`/job/${props.jobId}`}>
     <Card onClick={clickCard} className={classes.root}>
       <CardActionArea className={classes.actionArea}>
         <CardMedia
@@ -117,6 +117,7 @@ const JobCard = (props) => {
       </CardActionArea>
     </Card>
   </NavLink>
+  </BrowserRouter>
 }
 
 export default JobCard;

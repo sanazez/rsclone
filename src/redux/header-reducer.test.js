@@ -16,13 +16,13 @@ let initialState = {
     keyWords: []
 };
 
-it('state should get new pageId that store current pagination page, tests changePageCreater', () => {
+test('state should get new pageId that store current pagination page, tests changePageCreater', () => {
     let action = changePageCreater(25);
     let newState = headerReducer(initialState, action);
     expect(newState.pageId).toBe(25);
 });
 
-it('state should get and store search result and pages number, tests loadAllActionCreater', () => {
+test('state should get and store search result and pages number, tests loadAllActionCreater', () => {
     const searchExample = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}];
     let action = loadAllActionCreater(searchExample, 51);
     let newState = headerReducer(initialState, action);
@@ -30,14 +30,14 @@ it('state should get and store search result and pages number, tests loadAllActi
     expect(newState.searchResults[3].id).toBe(4);
 });
 
-it('state should get and store search text string, tests updateSearchTextActionCreater', () => {
+test('state should get and store search text string, tests updateSearchTextActionCreater', () => {
     const text = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.';
     let action = updateSearchTextActionCreater(text);
     let newState = headerReducer(initialState, action);
     expect(newState.searchText).toBe('Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
 });
 
-it('state should get and store info for job profile, tests loadJobProfileActionCreater', () => {
+test('state should get and store info for job profile, tests loadJobProfileActionCreater', () => {
     const data = {id: 52, title: 'some kind of worker'};
     let action = loadJobProfileActionCreater(data);
     let newState = headerReducer(initialState, action);
@@ -45,7 +45,7 @@ it('state should get and store info for job profile, tests loadJobProfileActionC
     expect(newState.jobPage.title).toBe('some kind of worker');
 });
 
-it('state should get and store info about similar jobs, tests loadSimilarJobsActionCreater', () => {
+test('state should get and store info about similar jobs, tests loadSimilarJobsActionCreater', () => {
     const info = [{id: 52, title: 'some kind of worker'}, {id: 47, title: 'another kind of worker'}, {id: 1, title: 'different kind of worker'}];
     let action = loadSimilarJobsActionCreater(info);
     let newState = headerReducer(initialState, action);
