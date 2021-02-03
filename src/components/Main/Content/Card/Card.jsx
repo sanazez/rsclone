@@ -84,8 +84,8 @@ const JobCard = (props) => {
       behavior: 'smooth'
     });
   }
-  return <BrowserRouter><NavLink to={`/job/${props.jobId}`}>
-    <Card onClick={clickCard} className={classes.root}>
+  return <a href={`/job/${props.jobId}`} onMouseDown={clickCard}>
+    <Card className={classes.root}>
       <CardActionArea className={classes.actionArea}>
         <CardMedia
           className={classes.cardImg}
@@ -116,8 +116,7 @@ const JobCard = (props) => {
         </CardContent>
       </CardActionArea>
     </Card>
-  </NavLink>
-  </BrowserRouter>
+  </a>
 }
 
 export default JobCard;

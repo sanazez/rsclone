@@ -4,7 +4,6 @@ import Pagination from '@material-ui/lab/Pagination';
 import { Link } from "react-router-dom";
 import PaginationItem from "@material-ui/lab/PaginationItem";
 import pageAudio from '../../../../sounds/click3.mp3';
-import { BrowserRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,17 +26,15 @@ export default function PaginationControlled(props) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-
             <Pagination onClick={clickPage} count={props.pages ? props.pages : 10} page={props.currentPage ? props.currentPage : 1} variant="outlined" shape="rounded"
                 renderItem={(item) => (
-                    <BrowserRouter>
-                        <PaginationItem
-                            type={"start-ellipsis"}
-                            component={Link}
-                            to={`/page/${item.page}`}
-                            {...item}
-                        />
-                    </BrowserRouter>
+
+                    <PaginationItem
+                        type={"start-ellipsis"}
+                        component={Link}
+                        to={`/page/${item.page}`}
+                        {...item}
+                    />
                 )} />
         </div>
     );
