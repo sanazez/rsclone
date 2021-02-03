@@ -12,7 +12,7 @@ const initialState = {
     typeSorting: 'relevance'
 }
 
-it('state should get new key words, tests getKeyWordsCitiesAC', () => {
+test('state should get new key words, tests getKeyWordsCitiesAC', () => {
     const keyWords = ['job', 'react', 'driver'];
     let action = getKeyWordsCitiesAC(keyWords);
     let newState = sidebarReducer(initialState, action);
@@ -22,14 +22,14 @@ it('state should get new key words, tests getKeyWordsCitiesAC', () => {
     expect(newState.keyWords.length).toBe(3);
 });
 
-it('state should get new city, tests updateSearchTextCities', () => {
+test('state should get new city, tests updateSearchTextCities', () => {
     const text = 'Minsk';
     let action = updateSearchTextCities(text);
     let newState = sidebarReducer(initialState, action);
     expect(newState.searchCityText).toBe('Minsk');
 });
 
-it('state should get new city and city id, tests setCurrentCityAC', () => {
+test('state should get new city and city id, tests setCurrentCityAC', () => {
     const city = 'Moscow';
     const cityId = '1003';
     let action = setCurrentCityAC(city, cityId);
@@ -38,21 +38,21 @@ it('state should get new city and city id, tests setCurrentCityAC', () => {
     expect(newState.currentCityId).toBe('1003');
 });
 
-it('state should get new time period, tests changeValueSelectTimeAC', () => {
+test('state should get new time period, tests changeValueSelectTimeAC', () => {
     const value = 7;
     let action = changeValueSelectTimeAC(value);
     let newState = sidebarReducer(initialState, action);
     expect(newState.period).toBe(7);
 });
 
-it('state should get new experience value, tests changeValueSelectExperienceAC', () => {
+test('state should get new experience value, tests changeValueSelectExperienceAC', () => {
     const value = 'between1And3';
     let action = changeValueSelectExperienceAC(value);
     let newState = sidebarReducer(initialState, action);
     expect(newState.experience).toBe('between1And3');
 });
 
-it('state should get value from marked checkboxes, tests MarkCheckBoxEmploymentAC', () => {
+test('state should get value from marked checkboxes, tests MarkCheckBoxEmploymentAC', () => {
     const value = 'full';
     const isSelect = true;
     let action = MarkCheckBoxEmploymentAC(value, isSelect);
@@ -60,7 +60,7 @@ it('state should get value from marked checkboxes, tests MarkCheckBoxEmploymentA
     expect(newState.employment[0]).toBe('full');
 });
 
-it('state should get value from marked checkboxes, tests MarkCheckBoxScheduleAC', () => {
+test('state should get value from marked checkboxes, tests MarkCheckBoxScheduleAC', () => {
     const value = 'fullDay';
     const isSelect = true;
     let action = MarkCheckBoxScheduleAC(value, isSelect);
@@ -68,7 +68,7 @@ it('state should get value from marked checkboxes, tests MarkCheckBoxScheduleAC'
     expect(newState.schedule[0]).toBe('fullDay');
 });
 
-it('state should get sorting type, tests sortingJobsAC', () => {
+test('state should get sorting type, tests sortingJobsAC', () => {
     const sorting = 'salary_desc';
     let action = sortingJobsAC(sorting);
     let newState = sidebarReducer(initialState, action);
