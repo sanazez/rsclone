@@ -16,17 +16,17 @@ Switch to branch develop
 git checkout develop
 ```
 
-Install dependencies:
+Install dependencies
 ```sh
 npm install
 ```
 
-Then run command:
+Then run command
 ```sh
 npm start
 ```
 
-To run tests:
+To run tests
 ```sh
 npm test
 ```
