@@ -9,10 +9,8 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import PublicIcon from '@material-ui/icons/Public';
 import Skeleton from '@material-ui/lab/Skeleton';
 import noLogo from '../../../../img/no-logo.png';
-import { NavLink } from 'react-router-dom';
 import audio from '../../../../sounds/click1.mp3';
 import styles from './Card.module.css';
-import { BrowserRouter } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -77,8 +75,11 @@ const JobCard = (props) => {
     </Card>
   }
   function clickCard() {
-    const soundCard = new Audio(audio);
-    soundCard.play();
+    let isMute = JSON.parse(window.localStorage.getItem('isMute'));
+    if(!isMute) {
+      const soundCard = new Audio(audio);
+      soundCard.play();
+    }
     window.scrollTo({
       top: 0,
       behavior: 'smooth'

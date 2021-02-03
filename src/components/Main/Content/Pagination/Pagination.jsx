@@ -15,8 +15,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PaginationControlled(props) {
     function clickPage() {
-        const soundPage = new Audio(pageAudio);
-        soundPage.play();
+        let isMute = JSON.parse(window.localStorage.getItem('isMute'));
+        if(!isMute) {
+            const soundPage = new Audio(pageAudio);
+            soundPage.play();
+        }
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -28,7 +31,6 @@ export default function PaginationControlled(props) {
         <div className={classes.root}>
             <Pagination onClick={clickPage} count={props.pages ? props.pages : 10} page={props.currentPage ? props.currentPage : 1} variant="outlined" shape="rounded"
                 renderItem={(item) => (
-
                     <PaginationItem
                         type={"start-ellipsis"}
                         component={Link}

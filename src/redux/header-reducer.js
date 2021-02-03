@@ -6,6 +6,7 @@ const FULL_TIME = 'FULL-TIME';
 const KEY_WORDS = 'KEY-WORDS';
 const CLEAR_KEY_WORDS = 'CLEAR-KEY-WORDS';
 const LOAD_SIMILAR = 'LOAD_SIMILAR';
+const MUTE_VOLUME = 'MUTE_VOLUME';
 
 const initialState = {
     searchText: '',
@@ -19,7 +20,8 @@ const initialState = {
     currentCity: '',
     searchCity: '',
     isFullTime: false,
-    keyWords: []
+    keyWords: [],
+    isMute: false
 }
 
 export const headerReducer = (state = initialState, action) => {
@@ -70,6 +72,12 @@ export const headerReducer = (state = initialState, action) => {
         case FULL_TIME: {
             let stateCopy = {...state};
             stateCopy.isFullTime = !state.isFullTime;
+            return stateCopy;
+        }
+
+        case MUTE_VOLUME: {
+            let stateCopy = {...state};
+            stateCopy.isMute = action.value;
             return stateCopy;
         }
 
@@ -132,6 +140,13 @@ export const loadSimilarJobsActionCreater = (info) => {
     return {
         type: LOAD_SIMILAR,
         info: info
+    }
+}
+
+export const updateVolumeActionCreater = (value) => {
+    return {
+        type: MUTE_VOLUME,
+        value: value
     }
 }
 

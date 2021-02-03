@@ -16,28 +16,29 @@ import similarJobAudio from '../../sounds/click1.mp3';
 import accordionAudio from '../../sounds/click3.mp3';
 import Avatar from '@material-ui/core/Avatar';
 import Skeleton from '@material-ui/lab/Skeleton';
+import MainHeaderContiner from '../Header/MainHeader/MainHeaderContainer';
 
 const useStyles = makeStyles({
   root: {
     display: 'flex',
     maxWidth: 1200,
     margin: '0 auto',
-    minHeight: '100vh'
-  },
-  profileSidebar: {
-    maxWidth: 230
+    minHeight: '100vh',
+    flexDirection: 'column',
+    alignItems: 'left'
   },
   profileMain: {
-    width: '80%',
     display: 'flex',
     flexDirection: 'column',
     margin: '0 auto',
-    padding: '50px 15px'
+    padding: '10px 15px',
+    width: '100%'
   },
   profileTitle: {
     display: 'flex',
     alignItems: 'center',
     marginBottom: 5,
+    marginTop: 35
   },
   profileTitleText: {
     margin: '0 10px 0 0'
@@ -112,37 +113,51 @@ const useStyles = makeStyles({
     width: '90%',
     height: '100vh',
     margin: '0 auto',
-    paddingTop: 50
+  
   },
   skeletonHeader: {
-    display: 'flex'
+    display: 'flex',
+    marginTop: 35
   }
 });
 
 const JobProfile = (props) => {
   const classes = useStyles();
   if (!props.profileInfo.id) {
-    return <div className={classes.skeletonRoot}>
-      <div className={classes.skeletonHeader}>
-        <Skeleton className={classes.skeletonAvatar} variant="circle">
-          <Avatar />
-        </Skeleton>
-        <Skeleton className={classes.skeletonTitle} width="100%">
-          <Typography>.</Typography>
-        </Skeleton>
-      </div>
-      <Skeleton className={classes.skeletonText} variant="rect" width="100%">
-        <div style={{ paddingTop: '57%' }} />
-      </Skeleton>
-    </div>
+    return <article className={classes.root}>
+      <main className={classes.profileMain}>
+        <MainHeaderContiner />
+      </main>
+        <div className={classes.skeletonRoot}>
+          <div className={classes.skeletonHeader}>
+            <Skeleton className={classes.skeletonAvatar} variant="circle">
+              <Avatar />
+            </Skeleton>
+            <Skeleton className={classes.skeletonTitle} width="100%">
+              <Typography>.</Typography>
+            </Skeleton>
+          </div>
+          <Skeleton className={classes.skeletonText} variant="rect" width="100%">
+            <div style={{ paddingTop: '57%' }} />
+          </Skeleton>
+        </div>
+      
+    </article>
   }
+  
   function handleSimilarJobSound() {
-    const soundSimilarJob = new Audio(similarJobAudio);
-    soundSimilarJob.play();
+    let isMute = JSON.parse(window.localStorage.getItem('isMute'));
+    if (!isMute) {
+      const soundSimilarJob = new Audio(similarJobAudio);
+      soundSimilarJob.play();
+    }
   }
   function handleAccordionSound() {
-    const soundAccordion = new Audio(accordionAudio);
-    soundAccordion.play();
+    let isMute = JSON.parse(window.localStorage.getItem('isMute'));
+    if (!isMute) {
+      const soundAccordion = new Audio(accordionAudio);
+      soundAccordion.play();
+    }
   }
   if (!props.profileInfo.id) {
     return <article></article>
@@ -164,7 +179,9 @@ const JobProfile = (props) => {
     }
   }
   return <article className={classes.root}>
+
     <main className={classes.profileMain}>
+      <MainHeaderContiner />
       <div className={classes.profileTitle}>
         <Typography className={classes.profileTitleText} variant="h4" gutterBottom>
           {props.profileInfo.name}
