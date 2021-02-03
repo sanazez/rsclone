@@ -21,7 +21,7 @@ const SimilarJobs = (props) => {
         }
         return `${Math.round(res)} ${daysText}`
     }
-    return <a onMouseDown={props.onClick} href={`/job/${props.similarJob.id}`} className={classes.similarJobContainer}>
+    return <a onMouseDown={props.onClick} href={`/job/${props.similarJob.id}`} className={classes.similarJobContainer} data-testid="click-button">
         <div className={classes.similarJobLogo}>
             <img src={logo ? logo.original : noLogo} alt="company logo" />
         </div>

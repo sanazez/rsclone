@@ -35,7 +35,6 @@ class JobProfileContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         profileInfo: state.headerElement.jobPage,
         similarJobs: state.headerElement.similarJobs,

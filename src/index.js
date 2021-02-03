@@ -3,18 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './redux/store';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import Footer from './components/Footer/Footer';
 
-ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-      <Footer />
-    </Provider>
-  </BrowserRouter>,
+
+ReactDOM.render(<App />,
   document.getElementById('root')
 );
 

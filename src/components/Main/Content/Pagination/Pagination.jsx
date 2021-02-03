@@ -28,6 +28,7 @@ export default function PaginationControlled(props) {
         <div className={classes.root}>
             <Pagination onClick={clickPage} count={props.pages ? props.pages : 10} page={props.currentPage ? props.currentPage : 1} variant="outlined" shape="rounded"
                 renderItem={(item) => (
+
                     <PaginationItem
                         type={"start-ellipsis"}
                         component={Link}

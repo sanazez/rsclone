@@ -18,7 +18,7 @@ const initialState = {
     typeSorting: 'relevance'
 }
 
-const sidebarReducer = (state = initialState, action) => {
+export const sidebarReducer = (state = initialState, action) => {
     switch (action.type) {
         case KEY_WORDS_CITIES : {
             let copyState = {...state};
@@ -39,7 +39,6 @@ const sidebarReducer = (state = initialState, action) => {
             let copyState = {...state};
             copyState.searchCityText = action.city;
             copyState.currentCityId = action.cityId;
-            console.log(copyState.currentCityId)
             copyState.keyWords = [];
             return copyState;
         }

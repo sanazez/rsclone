@@ -9,7 +9,6 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import PublicIcon from '@material-ui/icons/Public';
 import Skeleton from '@material-ui/lab/Skeleton';
 import noLogo from '../../../../img/no-logo.png';
-import { NavLink } from 'react-router-dom';
 import audio from '../../../../sounds/click1.mp3';
 import styles from './Card.module.css';
 
@@ -70,7 +69,6 @@ const useStyles = makeStyles({
 
 const JobCard = (props) => {
   const classes = useStyles();
-
   if (!props.title) {
     return <Card className={classes.preloader} >
       <Skeleton className={classes.preloaderContent} variant="text" animation="wave" />
@@ -84,8 +82,8 @@ const JobCard = (props) => {
       behavior: 'smooth'
     });
   }
-  return <NavLink to={`/job/${props.jobId}`}>
-    <Card onClick={clickCard} className={classes.root}>
+  return <a href={`/job/${props.jobId}`} onMouseDown={clickCard}>
+    <Card className={classes.root}>
       <CardActionArea className={classes.actionArea}>
         <CardMedia
           className={classes.cardImg}
@@ -116,7 +114,7 @@ const JobCard = (props) => {
         </CardContent>
       </CardActionArea>
     </Card>
-  </NavLink>
+  </a>
 }
 
 export default JobCard;

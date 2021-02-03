@@ -136,7 +136,6 @@ const JobProfile = (props) => {
       </Skeleton>
     </div>
   }
-  console.log(props);
   function handleSimilarJobSound() {
     const soundSimilarJob = new Audio(similarJobAudio);
     soundSimilarJob.play();
